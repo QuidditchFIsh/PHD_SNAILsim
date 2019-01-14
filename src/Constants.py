@@ -41,6 +41,10 @@ def E_L (l): return (phi0 ** 2)/(2 * l)
 
 def E_CQ(C): return (e ** 2) / (2 * C * 1e-15)
 
+def CHI(phi_M): return exp((phi_M ** 2)/2)
+
+def CHIprime(phi_M): return exp((phi_M ** 2)/18)
+
 
 
 
