@@ -37,10 +37,11 @@ phi_M = phiBar_M *(sM + sM.dag())
 
 #Now define the Hamiltonian using all of the Constants and variables. Will define the Hamiltonian in severl parts
 
+############ Will need to put in the expressions for these######
 H_0  = 
 H_S  = 
 H_qS =
-
+################################################################
 H = H_0 + H_S + H_qS
 
 #Using the mesolver solve the schroedinger equations numerically 

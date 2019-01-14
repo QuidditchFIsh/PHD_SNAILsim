@@ -17,7 +17,23 @@ L = 100e-9 # Inductace
 
 phi0 = (hbar) / (2 * e) # Quantum of Flux
 
-# Define functions for the energy of Inductance Capaticance 
+phibar1 = 1
+phibar2 = 1
+phibar3 = 1
+phibar4 = 1
+
+omega1 = 1
+omega2 = 1
+omega3 = 1
+omega4 = 1
+
+U1 = 1
+U2 = 1
+U3 = 1
+U4 = 1
+
+
+# Define functions for the energy of Inductance Capaticance etc
 
 def E_J (i): return i * (1e9) * h
 
