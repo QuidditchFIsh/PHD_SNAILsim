@@ -13,12 +13,12 @@ from math import *
 import time
 
 #Define the time dependant terms in the Hamiltonian as functions to be called
-omega = 0
-Amplitude = 0
+omega = 30
+Amplitude = 2
 
-def H1_Coeff(t,*args):
+def H1_Coeff_On(t,*args):
 	return Amplitude * cos(omega * t)
-def H1_coeff_off(t,*args):
+def H1_Coeff_Off(t,*args):
 	return 1
 
 #Constants will be defined in the constants class
@@ -27,20 +27,18 @@ print("============================================")
 print("Begining Program, setting up calculations")
 
 N = 2
-q1 = tensor(destroy(N),qeye(N),qeye(N),qeye(N))
-q2 = tensor(qeye(N),destroy(N),qeye(N),qeye(N))
-q3 = tensor(qeye(N),qeye(N),destroy(N),qeye(N))
-q4 = tensor(qeye(N),qeye(N),qeye(N),destroy(N))
+q1 = tensor(destroy(N),qeye(N),qeye(N))
+q2 = tensor(qeye(N),destroy(N),qeye(N))
+q3 = tensor(qeye(N),qeye(N),destroy(N))
 
 q1d = q1.dag()
 q2d = q2.dag()
 q3d = q3.dag()
-q4d = q4.dag()
 
 phi1 = phibar1 * (q1 + q1d)
 phi2 = phibar2 * (q2 + q2d)
 phi3 = phibar3 * (q3 + q3d)
-phi4 = phibar4 * (q4 + q4d)
+
 
 H0 = 0
 H1 = 0
@@ -48,30 +46,97 @@ H1 = 0
 H0 += (omega1 * q1d * q1) + (U1 * q1d * q1d * q1 * q1)
 H0 += (omega2 * q2d * q2) + (U2 * q2d * q2d * q2 * q2)
 H0 += (omega3 * q3d * q3) + (U3 * q3d * q3d * q3 * q3)
-H0 += (omega4 * q4d * q4) + (U4 * q4d * q4d * q4 * q4)
 
+H1 += 0.25  * EJT * (phi1 + phi2 - (2 * phi3))**2
+
+H1 += 0.5 * EJT * phi1 * phi2 * phi3
 
 #Prepareing the rest of the calculations
-tlist1 = np.linspace(0, 50, 200)#Time for equlibrium
-tlist2 = np.linspace(50, 200, 400)#Time for Evolution of the Time dependant hamiltonian
-
+tlist = np.linspace(0, 50, 50)
+tlist1 = np.linspace(100, 200, 400)
 #Basis states
 psi_list = []
 psi_list.append(basis(2,0))
-for n in range(3):
+for n in range(2):
     psi_list.append(basis(2,0))
 psi0 = tensor(psi_list)
 
 #collapse operator list
-c_op_list = [q1,q2,q3,q4]
+c_op_list = [q1,q2,q3]
 
 #operators to be evaulated
-sz1 = tensor(sigmaz(),qeye(N),qeye(N),qeye(N))
-sz2 = tensor(qeye(N),sigmaz(),qeye(N),qeye(N))
-sz3 = tensor(qeye(N),qeye(N),sigmaz(),qeye(N))
-sz4 = tensor(qeye(N),qeye(N),qeye(N),sigmaz())
+sz1 = tensor(sigmaz(),qeye(N),qeye(N))
+sz2 = tensor(qeye(N),sigmaz(),qeye(N))
+sz3 = tensor(qeye(N),qeye(N),sigmaz())
 
-eval_op_list = [sz1,sz2,sz3,sz4]
+avg_sz1 = []
+avg_sz2 = []
+avg_sz3 = []
+avg_sz4 = []
 
-Hon = [H0,[H1,H1_coeff]]
-Hoff = [H0,[H1,H1_coeff_off]]
+eval_op_list = [sz1,sz2,sz3]
+
+Wlist = np.linspace(1,(omega1 + omega2 + omega3),(omega1 + omega2 + omega3) * 2)
+
+Hon = [H0,[H1,H1_Coeff_On]]
+Hoff = [H0,[H1,H1_Coeff_Off]]
+
+print("Begining Calcultions")
+start = time.time()
+for i in Wlist:
+	omega = i
+	result = mesolve(Hoff,psi0,tlist,c_op_list,eval_op_list,options = Options(store_final_state=True,nsteps = 8000))
+
+	result1 = mesolve(Hon,result.final_state,tlist1,c_op_list,eval_op_list,options = Options(nsteps = 8000))
+
+	avg_sz1.append(np.average(np.real(result1.expect[0])))
+	avg_sz2.append(np.average(np.real(result1.expect[1])))
+	avg_sz3.append(np.average(np.real(result1.expect[2])))
+end = time.time()
+print("Processing Data")
+with open('../Output/RF/RF_QuBit_1_Expect_SZ.txt','w') as f:
+	for i in avg_sz1:
+		f.write(str(i) + "\n")
+with open('../Output/RF/RF_QuBit_2_Expect_SZ.txt','w') as f:
+	for i in avg_sz2:
+		f.write(str(i) + "\n")
+with open('../Output/RF/RF_QuBit_3_Expect_SZ.txt','w') as f:
+	for i in avg_sz3:
+		f.write(str(i) + "\n")
+
+with open('../Output/RF/RF_QuBit_1_Expect_SZ.txt','r') as f:
+	f1 = plt.figure(1)
+	plt.plot(Wlist,avg_sz1)
+	plt.title("Omega vs Sigmaz 1")
+	plt.xlabel("Omega")
+	plt.ylabel("<sigmaz>")
+	plt.savefig('../Output/RF/Img/RF_Omega_vs_Expectation1.png')
+with open('../Output/RF/RF_QuBit_2_Expect_SZ.txt','r') as f:
+	f2 = plt.figure(2)
+	plt.plot(Wlist,avg_sz2)
+	plt.title("Omega vs Sigmaz 2")
+	plt.xlabel("Omega")
+	plt.ylabel("<sigmaz>")
+	plt.savefig('../Output/RF/Img/RF_Omega_vs_Expectation2.png')
+with open('../Output/RF/RF_QuBit_3_Expect_SZ.txt','r') as f:
+	f3 = plt.figure(3)
+	plt.title("Omega vs Sigmaz 3")
+	plt.xlabel("Omega")
+	plt.ylabel("<sigmaz>")
+	plt.plot(Wlist,avg_sz3)
+	plt.savefig('../Output/RF/Img/RF_Omega_vs_Expectation3.png')
+
+f5 = plt.figure(5)
+plt.plot(avg_sz1)
+plt.plot(avg_sz2)
+plt.plot(avg_sz3)
+plt.title("Omega vs Sigmaz All")
+plt.xlabel("Omega")
+plt.ylabel("<sigmaz>")
+plt.savefig('../Output/RF/Img/RF_Omega_vs_Expectation_ALL.png')
+plt.legend(loc='right',fancybox = True, shadow = True)
+
+print("============================================")
+print("Time Ellapsed:" + str(end-start))
+print("============================================")
+

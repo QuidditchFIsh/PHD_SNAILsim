@@ -12,5 +12,15 @@ from qutip import *
 from Constants import *
 from math import *
 
-print(qeye(2))
-print(identity(2))
+N=2
+q1 = tensor(destroy(N),qeye(N))
+q1d = q1.dag()
+phi1 = (q1 + q1d)
+
+q2 = tensor(qeye(N),destroy(N))
+q2d = q2.dag()
+phi2 = (q2 + q2d)
+
+H0 =  q1d * q1
+
+x = phi1 * phi1

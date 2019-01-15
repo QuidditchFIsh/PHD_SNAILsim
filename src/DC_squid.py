@@ -15,7 +15,7 @@ import time
 
 omega = 5
 def H1_coeff(t, *args):
-	return 1*cos(omega * t)
+	return 8*cos(omega * t)
 	#return 0.5
 	
 def H1_coeff_off(t,*args):
@@ -78,8 +78,11 @@ H0 += omega4 * q4d * q4
 # Now the interaction parts of the Hamiltonian
 
 
-H1 = (1/16) * phi1 * phi2 * phi3 * phi4 
-H1 = (-1/8) * (phi1 + phi4 - phi2 - phi3)**2
+H1 = (0.0625 * phi1 * phi2 * phi3 * phi4 )
+H1 += (-0.125 * (phi1 + phi4 - phi2 - phi3)**2)
+
+print(H1)
+
 
 # Now need to add the driving fields into this so to activate the interactions.
 

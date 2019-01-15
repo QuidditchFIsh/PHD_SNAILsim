@@ -20,17 +20,26 @@ phi0 = (hbar) / (2 * e) # Quantum of Flux
 phibar1 = 1
 phibar2 = 1
 phibar3 = 1
-phibar4 = 1
+phibarP = 1
+phibarM = 1
 
-omega1 = 1
-omega2 = 1
-omega3 = 1
-omega4 = 1
+omega1 = 5.8
+omega2 = 28
+omega3 = 16
 
-U1 = 1
-U2 = 1
-U3 = 1
-U4 = 1
+U1 = 0
+U2 = 0
+U3 = 0
+
+EJT = 1
+
+ECQ1 = 1
+ECQ2 = 1
+ECQ3 = 1
+
+EJ = 1
+CG = 1
+EL = 1
 
 
 # Define functions for the energy of Inductance Capaticance etc
@@ -44,11 +53,3 @@ def E_CQ(C): return (e ** 2) / (2 * C * 1e-15)
 def CHI(phi_M): return exp((phi_M ** 2)/2)
 
 def CHIprime(phi_M): return exp((phi_M ** 2)/18)
-
-
-
-
-
-
-
-
