@@ -1,4 +1,3 @@
-
 '''
 Author: Aneirin John Baker
 Date : 14/01/2019
@@ -14,7 +13,7 @@ import time
 
 #Define the time dependant terms in the Hamiltonian as functions to be called
 omega = 30
-Amplitude = 4
+Amplitude = 1
 
 def H1_Coeff_On(t,*args):
 	return Amplitude * cos(omega * t)
@@ -49,7 +48,7 @@ H0 += (omega3 * q3d * q3) + (U3 * q3d * q3d * q3 * q3)
 
 H1 += 0.25  * EJT * (phi1 + phi2 - (2 * phi3))**2
 
-H1 += 2 * EJT * phi1 * phi2 * phi3
+H1 += 0.5 * EJT * phi1 * phi2 * phi3
 
 #Prepareing the rest of the calculations
 tlist = np.linspace(0, 50, 50)
@@ -76,67 +75,24 @@ avg_sz4 = []
 
 eval_op_list = [sz1,sz2,sz3]
 
-Wlist = np.linspace(40,60,20)
-Amp_List = np.linspace(1,10,10)
-phiBar_List = np.linspace(0.1,1,19)
-
-sigmaz_avgs = []
-phi_bar_temp_list = []
-PhiBar_Amplitude_Data = []
+Wlist = np.linspace(0,100,100)
 
 Hon = [H0,[H1,H1_Coeff_On]]
 Hoff = [H0,[H1,H1_Coeff_Off]]
 
 print("Begining Calcultions")
 start = time.time()
-for i in Amp_List:
-	for j in phiBar_List:
-		omega = 54
-		Amplitude = i
-		phibar1 = j
+for i in Wlist:
+	omega = i
+	result1 = mesolve(Hon,psi0,tlist1,c_op_list,eval_op_list,options = Options(nsteps = 8000))
+	#plt.plot(tlist1,np.real(result1.expect[0]))
+	#plt.show()
 
-		phi1 = phibar1 * (q1 + q1d)
-		phi2 = phibar1 * (q2 + q2d)
-		phi3 = phibar1 * (q3 + q3d)
-
-		H0 = 0
-		H1 = 0
-
-		H0 += (omega1 * q1d * q1) + (U1 * q1d * q1d * q1 * q1)
-		H0 += (omega2 * q2d * q2) + (U2 * q2d * q2d * q2 * q2)
-		H0 += (omega3 * q3d * q3) + (U3 * q3d * q3d * q3 * q3)
-
-		H1 += 0.25  * EJT * (phi1 + phi2 - (2 * phi3))**2
-
-		H1 += 2 * EJT * phi1 * phi2 * phi3
-
-		result = mesolve(Hoff,psi0,tlist,c_op_list,eval_op_list,options = Options(store_final_state=True,nsteps = 8000))
-
-		result1 = mesolve(Hon,result.final_state,tlist1,c_op_list,eval_op_list,options = Options(nsteps = 8000))
-		sigmaz_avgs.append(np.average(np.real(result1.expect[0])))
-		sigmaz_avgs.append(np.average(np.real(result1.expect[1])))
-		sigmaz_avgs.append(np.average(np.real(result1.expect[2])))
-		phi_bar_temp_list.append(sigmaz_avgs)
-		sigmaz_avgs = []
-	PhiBar_Amplitude_Data.append(phi_bar_temp_list)
-	phi_bar_temp_list = []
-	print(i)
+	avg_sz1.append(np.average(np.real(result1.expect[0])))
+	avg_sz2.append(np.average(np.real(result1.expect[1])))
+	avg_sz3.append(np.average(np.real(result1.expect[2])))
 end = time.time()
 print("Processing Data")
-with open("../Output/RF/RF_QuBit_AmpVSPhiBar_1.txt","w") as f:
-	for i in range(0,len(Amp_List)):
-		for j in range(0,len(phiBar_List)):
-			f.write(str(Amp_List[i]) + " " + str(phiBar_List[j]) + " " + str(PhiBar_Amplitude_Data[i][j][0]) + "\n")
-with open("../Output/RF/RF_QuBit_AmpVSPhiBar_2.txt","w") as f:
-	for i in range(0,len(Amp_List)):
-		for j in range(0,len(phiBar_List)):
-			f.write(str(Amp_List[i]) + " " + str(phiBar_List[j]) + " " + str(PhiBar_Amplitude_Data[i][j][1]) + "\n")
-with open("../Output/RF/RF_QuBit_AmpVSPhiBar_3.txt","w") as f:
-	for i in range(0,len(Amp_List)):
-		for j in range(0,len(phiBar_List)):
-			f.write(str(Amp_List[i]) + " " + str(phiBar_List[j]) + " " + str(PhiBar_Amplitude_Data[i][j][2]) + "\n")
-'''
-#Processing the basic averages
 with open('../Output/RF/RF_QuBit_1_Expect_SZ.txt','w') as f:
 	for i in avg_sz1:
 		f.write(str(i) + "\n")
@@ -178,9 +134,7 @@ plt.xlabel("Omega")
 plt.ylabel("<sigmaz>")
 plt.savefig('../Output/RF/Img/RF_Omega_vs_Expectation_ALL.png')
 plt.legend(loc='right',fancybox = True, shadow = True)
-'''
 
 print("============================================")
 print("Time Ellapsed:" + str(end-start))
 print("============================================")
-

@@ -14,7 +14,7 @@ import time
 
 #Define the time dependant terms in the Hamiltonian as functions to be called
 omega = 30
-Amplitude = 2
+Amplitude = 50
 
 def H1_Coeff_On(t,*args):
 	return Amplitude * cos(omega * t)
@@ -45,31 +45,32 @@ phi3 = phibar3 * (q3 + q3d)
 varphiP = (phi1 + phi2 + 2*phi3)
 varphiM = (phi1 + phi2 - 2*phi3)
 
-pi1 = (hbar/(2 * phibar1)) * (q1 - q1d)
-pi2 = (hbar/(2 * phibar2)) * (q2 - q2d)
-pi3 = (hbar/(2 * phibar3)) * (q3 - q3d)
+pi1 = (1/(2 * phibar1)) * (q1 - q1d)
+pi2 = (1/(2 * phibar2)) * (q2 - q2d)
+pi3 = (1/(2 * phibar3)) * (q3 - q3d)
 
 phiP = phibarP * (sP + sPd)
 phiM = phibarM * (sM + sMd)
 
 phiMhalf = 0.5 * phiM
-phiMthird = 0.333333333 * phiM
+phiMthird = 0.3333333333333333 * phiM
 
-piP = (hbar/(2 * phibarP)) * (sP - sPd)
-piM = (hbar/(2 * phibarM)) * (sM - sMd)
+piP = (1/(2 * phibarP)) * (sP - sPd)
+piM = (1/(2 * phibarM)) * (sM - sMd)
 
 #Setting up the Hamiltonian .....THis is gonna be long
 
 H0 = 0
 H1 = 0
 #Will have to check about the cos of the matrix
-H0 += (4 * ECQ1 * (1/hbar**2)) * pi1*pi1 + (4 * ECQ2 * (1/hbar**2)) * pi2*pi2 + (4 * ECQ3 * (1/hbar**2)) * pi3*pi3 + EJ * phi1.cosm() + EJ * phi2.cosm() + EJ * phi3.cosm() + (phi0**2 * (1/(2*L)) * ((phi1 * phi1) + (phi2 * phi2) + 0.5 * (phi3 * phi3)))
+H0 += (4 * ECQ1 * (1/1**2)) * pi1*pi1 + (4 * ECQ2 * (1/1**2)) * pi2*pi2 + (4 * ECQ3 * (1/1**2)) * pi3*pi3 + EJ1 * phi1.cosm() + EJ2 * phi2.cosm() + EJ3 * phi3.cosm() + (phi0**2 * (1/(2*L)) * ((phi1 * phi1) + (phi2 * phi2) + 0.5 * (phi3 * phi3)))
 
 H0 += EL * (phiP*phiP + phiM*phiM) + EL * (phiP*varphiP + phiM*varphiM) 
 H0 += phiP*phiP * (0.5 * (1/CG) * (1/phi0**2)) + phiM * phiM * (0.5 * (1/CG) * (1/phi0**2))
 
 H1 += EJ * phiMhalf.sinm() + EJ * phiMhalf.cosm()
 
+print(H0)
 
 #Prepareing the rest of the calculations
 tlist = np.linspace(0, 50, 50)
@@ -96,7 +97,7 @@ avg_sz4 = []
 
 eval_op_list = [sz1,sz2,sz3]
 
-Wlist = np.linspace(1,5,5)
+Wlist = np.linspace(1,20,20)
 
 Hon = [H0,[H1,H1_Coeff_On]]
 Hoff = [H0,[H1,H1_Coeff_Off]]
