@@ -32,28 +32,28 @@ L = 100e-9 # Inductace
 
 phi0 = (hbar) / (2 * e) # Quantum of Flux
 
-phibar1 = 0.423503325645
-phibar2 = 0.575396830011
-phibar3 = 0.554480114963
+phibar1 = 0.668185751905
+phibar2 = 0.379659153049
+phibar3 = 0.554480114968
 #phibarP = 0
 #phibarM = 0
 
-omega1 = 169.64
-omega2 = 163.38
+omega1 = 35.173
+omega2 = 105.5448
 omega3 = 175.938
 
-U1 = 3.64
-U2 = 6.2
+U1 = 0.939
+U2 = 1.79497
 U3 = 5.79
 
 EJT = 63
 
-ECQ1 = E_CQ(16)
-ECQ2 = E_CQ(9)
+ECQ1 = E_CQ(31)
+ECQ2 = E_CQ(32)
 ECQ3 = E_CQ(9)
 
-EJ1 = 72
-EJ2 = 36
+EJ1 = 3
+EJ2 = 55
 EJ3 = 39
 
 EJ =10 * h

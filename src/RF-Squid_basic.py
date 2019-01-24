@@ -96,30 +96,33 @@ fidelity001 = []
 
 eval_op_list = [sz1,sz2,sz3]
 
-Wlist = np.linspace(0,500,500)
+Wlist = np.linspace(0,10,500)
 
 Hon = [H0,[H1,H1_Coeff_On]]
 Hoff = [H0,[H1,H1_Coeff_Off]]
 
 print("Begining Calcultions")
 start = time.time()
-for i in Wlist:
-	omega = i
-	result1 = mesolve(Hon,psi0,tlist1,c_op_list,eval_op_list,options = Options(nsteps = 8000,store_final_state = True))
-	#plt.plot(tlist1,np.real(result1.expect[0]))
-	#plt.show()
-	fidelity111.append(fidelity(result1.final_state,Tdm_111))
-	fidelity110.append(fidelity(result1.final_state,Tdm_110))
-	fidelity101.append(fidelity(result1.final_state,Tdm_101))
-	fidelity011.append(fidelity(result1.final_state,Tdm_011))
-	fidelity100.append(fidelity(result1.final_state,Tdm_100))
-	fidelity001.append(fidelity(result1.final_state,Tdm_001))
-	fidelity010.append(fidelity(result1.final_state,Tdm_010))
+#for i in Wlist:
+tlist = np.linspace(0, 50, 50)
+result1 = mesolve(Hon,psi0,tlist,c_op_list,eval_op_list,options = Options(nsteps = 8000,store_final_state = True,store_states = True))
+#plt.plot(tlist1,np.real(result1.expect[0]))
+#plt.show()
 
-	avg_sz1.append(np.average(np.real(result1.expect[0])))
-	avg_sz2.append(np.average(np.real(result1.expect[1])))
-	avg_sz3.append(np.average(np.real(result1.expect[2])))
+'''
+fidelity111.append(fidelity(result1.final_state,Tdm_111))
+fidelity110.append(fidelity(result1.final_state,Tdm_110))
+fidelity101.append(fidelity(result1.final_state,Tdm_101))
+fidelity011.append(fidelity(result1.final_state,Tdm_011))
+fidelity100.append(fidelity(result1.final_state,Tdm_100))
+fidelity001.append(fidelity(result1.final_state,Tdm_001))
+fidelity010.append(fidelity(result1.final_state,Tdm_010))
+avg_sz1.append(np.average(np.real(result1.expect[0])))
+avg_sz2.append(np.average(np.real(result1.expect[1])))
+avg_sz3.append(np.average(np.real(result1.expect[2])))
+'''
 end = time.time()
+'''
 print("Processing Data")
 with open('../Output/RF/RF_QuBit_1_Expect_SZ.txt','w') as f:
 	for i in avg_sz1:
@@ -234,7 +237,7 @@ plt.xlabel("Omega")
 plt.ylabel("<sigmaz>")
 plt.savefig('../Output/RF/Img/RF_Omega_vs_Expectation_ALL.png')
 plt.legend(loc='right',fancybox = True, shadow = True)
-
+'''
 print("============================================")
 print("Time Ellapsed:" + str(end-start))
 print("============================================")
