@@ -91,8 +91,8 @@ fidelity001 = []
 
 eval_op_list = [sz1,sz2,sz3]
 
-#Wlist = [315,210,140,280,35,175,105]
-Wlist = [315,210]
+Wlist = [315,210,140,280,35,175,105]
+#Wlist = [315,210]
 
 Hon = [H0,[H1,H1_Coeff_On]]
 Hoff = [H0,[H1,H1_Coeff_Off]]
@@ -111,36 +111,54 @@ for i in Wlist:
 		fidelity100.append(fidelity(result.states[i],Tdm_100))
 		fidelity001.append(fidelity(result.states[i],Tdm_001))
 		fidelity010.append(fidelity(result.states[i],Tdm_010))
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity111.txt','w') as f:
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity111.txt','w') as f1:
 		for j in fidelity111:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity110.txt','w') as f:
+			f1.write(str(j) + "\n")
+	f1.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity110.txt','w') as f2:
 		for j in fidelity110:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity101.txt','w') as f:
+			f2.write(str(j) + "\n")
+	f2.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity101.txt','w') as f3:
 		for j in fidelity101:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity011.txt','w') as f:
+			f3.write(str(j) + "\n")
+	f3.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity011.txt','w') as f4:
 		for j in fidelity011:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity100.txt','w') as f:
+			f4.write(str(j) + "\n")
+	f4.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity100.txt','w') as f5:
 		for j in fidelity100:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity001.txt','w') as f:
+			f5.write(str(j) + "\n")
+	f5.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity001.txt','w') as f6:
 		for j in fidelity001:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity010.txt','w') as f:
+			f6.write(str(j) + "\n")
+	f6.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_fidelity010.txt','w') as f7:
 		for j in fidelity010:
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + 'sigmaz_1.txt','w') as f:
+			f7.write(str(j) + "\n")
+	f7.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_sigmaz_1.txt','w') as f8:
 		for j in np.real(result.expect[0]):
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + 'sigmaz_2.txt','w') as f:
+			f8.write(str(j) + "\n")
+	f8.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_sigmaz_2.txt','w') as f9:
 		for j in np.real(result.expect[1]):
-			f.write(str(j) + "\n")
-	with open('../Output/RF_24-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + 'sigmaz_3.txt','w') as f:
+			f9.write(str(j) + "\n")
+	f9.close()
+	with open('../Output/RF_25-01-19/RF-freq_explore/RF_SQUID_' + str(omega) + '_sigmaz_3.txt','w') as f10:
 		for j in np.real(result.expect[2]):
-			f.write(str(j) + "\n")
+			f10.write(str(j) + "\n")
+	f10.close()
+	
+	fidelity111 = []
+	fidelity110 = []
+	fidelity101 = []
+	fidelity011 = []
+	fidelity100 = []
+	fidelity010 = []
+	fidelity001 = []
 
 end = time.time()
 
