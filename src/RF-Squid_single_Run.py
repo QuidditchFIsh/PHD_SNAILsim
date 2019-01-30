@@ -16,7 +16,7 @@ omega = 35
 Amplitude = 1
 
 def H1_Coeff_On(t,*args):
-	return Amplitude * cos(omega * t)
+	return Amplitude * cos(211.111 * t) + Amplitude * cos(70.3718 * t)
 def H1_Coeff_Off(t,*args):
 	return 1
 
@@ -101,7 +101,6 @@ print("Begining Calcultions")
 start = time.time()
 tlist = np.linspace(0, 1, 1000)
 for i in Wlist:
-	omega = i
 	result = mesolve(Hon,psi0,tlist,c_op_list,eval_op_list,options = Options(nsteps = 8000,store_states = True))	
 
 	for i in range(0,1000):

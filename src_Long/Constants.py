@@ -18,6 +18,14 @@ def CHI(phi_M): return exp((phi_M ** 2)/2)
 
 def CHIprime(phi_M): return exp((phi_M ** 2)/18)
 
+def calc_U(ECQ,EJ,El): return(ECQ/(2*hbar) * ((EJ)/((EJ) + (4 * El))) * 1e-9)
+
+def calc_phiBar(ECQ,EJ,El): return(((2 * ECQ)/((EJ) + (4 * El)))**0.25)
+
+def calc_U3(ECQ,EJ,El): return(ECQ/(2*hbar) * ((EJ)/((EJ) + (8 * El))) * 1e-9)
+
+def calc_phiBar3(ECQ,EJ,El): return(((2 * ECQ)/((EJ) + (8 * El)))**0.25)
+
 e = 1.60217662e-19 # Charge on the Electron
 #e = 1
 
@@ -32,28 +40,28 @@ L = 100e-9 # Inductace
 
 phi0 = (hbar) / (2 * e) # Quantum of Flux
 
-phibar1 = 0.668185751905
-phibar2 = 0.379659153049
-phibar3 = 0.554480114968
+phibar1 = 0
+phibar2 = 0
+phibar3 = 0
 #phibarP = 0
 #phibarM = 0
 
-omega1 = 35
-omega2 = 105
-omega3 = 176
+omega1 = 0
+omega2 = 0
+omega3 = 0
 
-U1 = 0.939
-U2 = 1.79497
-U3 = 5.79
+U1 = 0
+U2 = 0
+U3 = 0
 
 EJT = 63
-ECQ1 = E_CQ(31)
-ECQ2 = E_CQ(32)
-ECQ3 = E_CQ(9)
+ECQ1 = 0
+ECQ2 = 0
+ECQ3 = 0
 
-EJ1 = 3
-EJ2 = 55
-EJ3 = 39
+EJ1 = 0
+EJ2 = 0
+EJ3 = 0
 
 EJ =10 * h
 
@@ -61,10 +69,12 @@ CG = 1
 EL = E_L(L)
 
 
+
+'''
 print((1/(hbar)) * sqrt(8 * ECQ1 *((EJ1 * h * 1e9 ) + (4*EL))) * 1e-9)
 print(ECQ1/(2*hbar) * ((EJ1 * h * 1e9 )/((EJ1 * 1e9 * h) + (4 * EL))) * 1e-9)
 print(((2 * ECQ1)/((EJ1 * h * 1e9) + (4 * EL)))**0.25)
-'''
+
 print((1/(hbar)) * sqrt(8 * ECQ2 *((EJ2 * h * 1e9 ) + (4*EL))) * 1e-9)
 print(ECQ2/(2*hbar) * ((EJ2 * h * 1e9 )/((EJ2 * 1e9 * h) + (4 * EL))) * 1e-9)
 print(((2 * ECQ2)/((EJ2 * h * 1e9) + (4 * EL)))**0.25)
@@ -72,16 +82,4 @@ print(((2 * ECQ2)/((EJ2 * h * 1e9) + (4 * EL)))**0.25)
 print((1/(hbar)) * sqrt(8 * ECQ3 *((EJ3 * h * 1e9 ) + (8*EL))) * 1e-9)
 print(ECQ3/(2*hbar) * ((EJ3 * h * 1e9 )/((EJ3 * 1e9 * h) + (8 * EL))) * 1e-9)
 print(((2 * ECQ3)/((EJ3 * h * 1e9) + (8 * EL)))**0.25)
-
-
-26.9998356504 72.0 16.0 0.423503325646
-26.0026322606 36.0 9.0 0.575396830014
-28.001435245 39.0 9.0 0.554480114968
-0.137657147912
-
-5.59807404012 3.0 31.0 0.668185751905
-16.7979786878 55.0 32.0 0.379659153049
-28.001435245 39.0 9.0 0.554480114968
-0.143306392178
-
 '''
