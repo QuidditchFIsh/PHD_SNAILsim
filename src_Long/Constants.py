@@ -54,7 +54,7 @@ U1 = 0
 U2 = 0
 U3 = 0
 
-EJT = 63
+EJT = 70
 ECQ1 = 0
 ECQ2 = 0
 ECQ3 = 0
