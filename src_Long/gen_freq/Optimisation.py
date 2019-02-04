@@ -11,51 +11,100 @@ F2 = 13.1
 F3 = 3.00
 
 def constraint1(x):
-    return abs((x[0]- x[1] + x[2])) - 0.1
+    freqs1 = []
+
+    F11 = x[0]
+    F21 = x[1]
+    F31 = x[2]
+
+    freqs1.append(F11)
+    freqs1.append(F21)
+    freqs1.append(F31)
+
+    freqs1.append(float(F11-F21))
+    freqs1.append(float(F11-F31))
+    freqs1.append(float(F21-F31))
+
+    freqs1.append(float(F11+F21))
+    freqs1.append(float(F11+F31))
+    freqs1.append(float(F21+F31))
+
+    freqs1.append(float(F11 + F21 + F31))
+    freqs1.append(float(F11 + F21 - F31))
+    freqs1.append(float(F11 - F21 + F31))
+    freqs1.append(float(-F11 + F21 + F31))
+
+    freqs1 = sorted(freqs1)
+
+    diff = 10**20
+
+    for i in range(12):
+        if abs(freqs1[i+1] - freqs1[i]) < diff:
+            diff = abs(freqs1[i+1] - freqs1[i])
+    return diff - 0.6
 def constraint2(x):
-    return abs((x[0]- x[1] - x[2])) - 0.1
-def constraint3(x):
-    x1 = abs(x[0]-x[1])
-    x2 = abs(x[0]-x[2])
-    x3 = abs(x[1]-x[2])
-    return abs(min(x1,x2,x3)) - 0.6
+    freqs2 = []
+
+    F12 = x[0]
+    F22 = x[1]
+    F32 = x[2]
+
+    freqs2.append(F12)
+    freqs2.append(F22)
+    freqs2.append(F32)
+
+    freqs2.append(float(F12-F22))
+    freqs2.append(float(F12-F32))
+    freqs2.append(float(F22-F32))
+
+    freqs2.append(float(F12+F22))
+    freqs2.append(float(F12+F32))
+    freqs2.append(float(F22+F32))
+
+    freqs2.append(float(F12 + F22 + F32))
+    freqs2.append(float(F12 + F22 - F32))
+    freqs2.append(float(F12 - F22 + F32))
+    freqs2.append(float(-F12 + F22 + F32))
+
+    freqs2 = [abs(i) for i in freqs2]
+
+    return min(freqs2) - 0.5
+
 
 def difference(x0):
 
-    two_body = []
-    three_body = []
+    freqs = []
 
     F1 = x0[0]
     F2 = x0[1]
     F3 = x0[2]
 
-    two_body.append(float(F1-F2))
-    two_body.append(float(F1-F3))
-    two_body.append(float(F2-F3))
+    freqs.append(F1)
+    freqs.append(F2)
+    freqs.append(F3)
 
-    two_body.append(float(F1+F2))
-    two_body.append(float(F1+F3))
-    two_body.append(float(F2+F3))
+    freqs.append(float(F1-F2))
+    freqs.append(float(F1-F3))
+    freqs.append(float(F2-F3))
 
-    three_body.append(float(F1 + F2 + F3))
-    three_body.append(float(F1 + F2 - F3))
-    three_body.append(float(F1 - F2 + F3))
-    three_body.append(float(F1 - F2 - F3))
+    freqs.append(float(F1+F2))
+    freqs.append(float(F1+F3))
+    freqs.append(float(F2+F3))
 
-    min = 1000
-    for i in three_body:
-        if(abs(i-j) < min):
-            min = abs(i-j)
-    return -1 * min
+    freqs.append(float(F1 + F2 + F3))
+    freqs.append(float(F1 + F2 - F3))
+    freqs.append(float(F1 - F2 + F3))
+    freqs.append(float(-F1 + F2 + F3))
+
+    return -1 * min(freqs)
 ''' Setting the Bounds and Contraints '''
 b1 = (2,25)
 bnds =[b1,b1,b1]
 
 con1 = {'type': 'ineq', 'fun' : constraint1}
 con2 = {'type': 'ineq', 'fun' : constraint2}
-con3 = {'type': 'ineq', 'fun' : constraint3}
 
-cons = [con1,con2,con3]
+cons = [con1,con2]
 
 '''Opening a File for output '''
 opt_out = []
@@ -65,9 +114,9 @@ opt_str = []
 
 ''' Initalising the loop and the inital conditions'''
 x0 = [3,3,3]
-for i in range(0,2):
-    for j in range(0,2):
-        for k in range(0,2):
+for i in range(0,5):
+    for j in range(0,5):
+        for k in range(0,5):
             x = [x0[0] + i,x0[1] + j , x0[2] + k]
             if(x[1] != x[0] and x[1] != x[2]):
                 sol = minimize(difference,x,method='SLSQP',bounds=bnds,constraints=cons)
@@ -99,6 +148,6 @@ for i in x:
                  + " " + str(Josephson_Energy[int(temp[0])]) + " " + 
                  str(frequencies[int(temp[1])]) + " " + str(Capaticance[int(temp[1])])
                  + " " + str(Josephson_Energy[int(temp[1])]) + " " +
-                 str(frequencies[int(temp[1])]) + " " + str(Capaticance[int(temp[1])])
-                 + " " + str(Josephson_Energy[int(temp[1])]) + " ")
+                 str(frequencies[int(temp[2])]) + " " + str(Capaticance[int(temp[2])])
+                 + " " + str(Josephson_Energy[int(temp[2])]) + " ")
 

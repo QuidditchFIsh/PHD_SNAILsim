@@ -29,7 +29,7 @@ def H1_Coeff_On(t,*args):
 	+ 0.25 * cos((cons.omega1 + cons.omega2 + cons.omega3) * t) + 0.25 * cos((- cons.omega1 + cons.omega2 + cons.omega3) * t) 
 	+ 0.25 * cos((cons.omega1 - cons.omega2 + cons.omega3) * t) + 0.25 * cos((cons.omega1 + cons.omega2 - cons.omega3) * t))
 	'''
-	return cos((cons.omega1 + cons.omega2) * t)
+	return cos((cons.omega1 - cons.omega2) * t * 0.5)
 print("============================================")
 print("Begining Program, setting up calculations")
 #Define the Variables
@@ -75,7 +75,7 @@ phi3 = cons.phibar3 * (q3 + q3d)
 one  = (basis(2,0)+(0+1j)*basis(2,1)).unit()
 zero = (basis(2,0)-(0+1j)*basis(2,1)).unit()
 
-psi0 = tensor(zero,zero,one)
+psi0 = tensor(zero,zero,zero)
 
 Tdm_111 = tensor(one ,one ,one  )
 Tdm_110 = tensor(one ,one ,zero )
@@ -175,52 +175,68 @@ for i in range(0,Notrials):#Ignore the odd for loop and the input stuff this is 
   	strength = cons.phibar1 * cons.phibar2 * cons.phibar3
   	print(str(strength) + ' ' + str(i))
 
-  	createFolder('../Output/RF_31-01-19/' + str(i))
+	Folder_Path = '../Output/RF_04-02-19/'
 
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity111.txt','w') as f1:
+  	createFolder(Folder_Path + str(i))
+
+  	with open(Folder_Path + str(i) + '/Fidelity111.txt','w') as f1:
 		for j in tempfid111:
 			f1.write(str(j) + "\n")
 	f1.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity110.txt','w') as f2:
+  	with open(Folder_Path + str(i) + '/Fidelity110.txt','w') as f2:
 		for j in tempfid110:
 			f2.write(str(j) + "\n")
 	f2.close()
-	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity101.txt','w') as f3:
+	with open(Folder_Path  + str(i) + '/Fidelity101.txt','w') as f3:
 		for j in tempfid101:
 			f3.write(str(j) + "\n")
 	f3.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity011.txt','w') as f4:
+  	with open(Folder_Path  + str(i) + '/Fidelity011.txt','w') as f4:
 		for j in tempfid011:
 			f4.write(str(j) + "\n")
 	f4.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity100.txt','w') as f5:
+  	with open(Folder_Path  + str(i) + '/Fidelity100.txt','w') as f5:
 		for j in tempfid100:
 			f5.write(str(j) + "\n")
 	f5.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity010.txt','w') as f6:
+  	with open(Folder_Path  + str(i) + '/Fidelity010.txt','w') as f6:
 		for j in tempfid010:
 			f6.write(str(j) + "\n")
 	f6.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity001.txt','w') as f7:
+  	with open(Folder_Path  + str(i) + '/Fidelity001.txt','w') as f7:
 		for j in tempfid001:
 			f7.write(str(j) + "\n")
 	f7.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/Fidelity000.txt','w') as f11:
+  	with open(Folder_Path  + str(i) + '/Fidelity000.txt','w') as f11:
 		for j in tempfid000:
 			f11.write(str(j) + "\n")
 	f11.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/expect_sz1.txt','w') as f8:
+  	with open(Folder_Path  + str(i) + '/expect_sz1.txt','w') as f8:
 		for j in temp_sz1:
 			f8.write(str(j) + "\n")
 	f8.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/expect_sz2.txt','w') as f9:
+  	with open(Folder_Path  + str(i) + '/expect_sz2.txt','w') as f9:
 		for j in temp_sz2:
 			f9.write(str(j) + "\n")
 	f9.close()
-  	with open('../Output/RF_31-01-19/' + str(i) + '/expect_sz3.txt','w') as f10:
+  	with open(Folder_Path  + str(i) + '/expect_sz3.txt','w') as f10:
 		for j in temp_sz3:
 			f10.write(str(j) + "\n")
 	f10.close()
+	with open(Folder_Path +str(i) + '/Simulation_Run_Data.dat','w') as f12:
+		f12.write(str(cons.omega1) + " w1 \n")
+		f12.write(str(cons.omega2) + " w2 \n")
+		f12.write(str(cons.omega3) + " w3 \n")
+		f12.write(str(cons.omega1 + cons.omega2) + " w1 + w2\n")
+		f12.write(str(cons.omega1 - cons.omega2) + " w1 - w2\n")
+		f12.write(str(cons.omega1 + cons.omega3) + " w1 + w3\n")
+		f12.write(str(cons.omega1 - cons.omega3) + " w1 - w3\n")
+		f12.write(str(cons.omega2 + cons.omega3) + " w2 + w3\n")
+		f12.write(str(cons.omega2 - cons.omega3) + " w2 - w3\n")
+		f12.write(str(cons.omega1 + cons.omega2 + cons.omega3) + " w1 + w2 + w3\n")
+		f12.write(str(cons.omega1 + cons.omega2 - cons.omega3) + " w1 + w2 - w3\n")
+		f12.write(str(cons.omega1 - cons.omega2 + cons.omega3) + " w1 - w2 + w3\n")
+		f12.write(str(-cons.omega1 + cons.omega2 + cons.omega3) + "-w1 + w2 + w3\n")
 
 	tempfid111 = []
 	tempfid110 = []
