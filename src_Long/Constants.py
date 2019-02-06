@@ -54,7 +54,7 @@ U1 = 0
 U2 = 0
 U3 = 0
 
-EJT = 70
+EJT = 0.1
 ECQ1 = 0
 ECQ2 = 0
 ECQ3 = 0
@@ -63,7 +63,7 @@ EJ1 = 0
 EJ2 = 0
 EJ3 = 0
 
-EJ =10 * h
+#EJ =10 * h
 
 CG = 1
 EL = E_L(L)

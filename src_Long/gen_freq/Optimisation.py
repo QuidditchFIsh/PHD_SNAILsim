@@ -114,9 +114,9 @@ opt_str = []
 
 ''' Initalising the loop and the inital conditions'''
 x0 = [3,3,3]
-for i in range(0,5):
-    for j in range(0,5):
-        for k in range(0,5):
+for i in range(0,3):
+    for j in range(0,3):
+        for k in range(0,3):
             x = [x0[0] + i,x0[1] + j , x0[2] + k]
             if(x[1] != x[0] and x[1] != x[2]):
                 sol = minimize(difference,x,method='SLSQP',bounds=bnds,constraints=cons)
