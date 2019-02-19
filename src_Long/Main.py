@@ -17,20 +17,23 @@ def createFolder(directory):
 
 #Set up the equations
 def H1_Coeff_On(t,*args):
-	'''
-	return (0.125 * cos((cons.omega1) * t) + 0.125 * cos((cons.omega2) * t) - 0.125 * cos((cons.omega3) * t)
-	+ 0.0625 * cos((cons.omega1 + cons.omega2) * t) + 0.0625 * cos((cons.omega1 - cons.omega2) * t) - 0.0625 * cos((cons.omega1 + cons.omega3) * t)
-	- 0.0625 * cos((cons.omega1 - cons.omega3) * t) - 0.0625 * cos((cons.omega2 + cons.omega3) * t) - 0.0625 * cos((cons.omega2 - cons.omega3) * t)
-	- 0.03125 * cos((cons.omega1 + cons.omega2 + cons.omega3) * t) - 0.03125 * cos((- cons.omega1 + cons.omega2 + cons.omega3) * t) 
-	- 0.03125 * cos((cons.omega1 - cons.omega2 + cons.omega3) * t) - 0.03125 * cos((cons.omega1 + cons.omega2 - cons.omega3) * t))
 	
-	return (0.75 + 0.25 * cos((cons.omega1) * t) + 0.25 * cos((cons.omega2) * t) + 0.25 * cos((cons.omega3) * t)
-	+ 0.25 * cos((cons.omega1 + cons.omega2) * t) + 0.25 * cos((cons.omega1 - cons.omega2) * t) + 0.25 * cos((cons.omega1 + cons.omega3) * t)
-	+ 0.25 * cos((cons.omega1 - cons.omega3) * t) + 0.25 * cos((cons.omega2 + cons.omega3) * t) + 0.25 * cos((cons.omega2 - cons.omega3) * t)
-	+ 0.25 * cos((cons.omega1 + cons.omega2 + cons.omega3) * t) + 0.25 * cos((- cons.omega1 + cons.omega2 + cons.omega3) * t) 
-	+ 0.25 * cos((cons.omega1 - cons.omega2 + cons.omega3) * t) + 0.25 * cos((cons.omega1 + cons.omega2 - cons.omega3) * t))
-	'''
-	return cos((cons.omega1 - cons.omega2 + cons.omega3) * t )
+	
+	#return (0.125 * cos((0) * t))
+	#return (0.125 * cos((cons.omega1) * t) + 0.125 * cos((cons.omega2) * t) - 0.125 * cos((cons.omega3) * t))
+	#+ 0.0625 * cos((cons.omega1 + cons.omega2) * t) + 0.0625 * cos((cons.omega1 - cons.omega2) * t) - 0.0625 * cos((cons.omega1 + cons.omega3) * t)
+	#- 0.0625 * cos((cons.omega1 - cons.omega3) * t) - 0.0625 * cos((cons.omega2 + cons.omega3) * t) - 0.0625 * cos((cons.omega2 - cons.omega3) * t)
+	#- 0.03125 * cos((cons.omega1 + cons.omega2 + cons.omega3) * t) - 0.03125 * cos((- cons.omega1 + cons.omega2 + cons.omega3) * t) 
+	#- 0.03125 * cos((cons.omega1 - cons.omega2 + cons.omega3) * t) - 0.03125 * cos((cons.omega1 + cons.omega2 - cons.omega3) * t)
+	
+	#return (0.25 * cos((cons.omega1) * t) + 0.25 * cos((cons.omega2) * t) + 0.25 * cos((cons.omega3) * t)
+	#+ 0.25 * cos((cons.omega1 + cons.omega2) * t) + 0.25 * cos((cons.omega1 - cons.omega2) * t) + 0.25 * cos((cons.omega1 + cons.omega3) * t)
+	#+ 0.25 * cos((cons.omega1 - cons.omega3) * t) + 0.25 * cos((cons.omega2 + cons.omega3) * t) + 0.25 * cos((cons.omega2 - cons.omega3) * t)
+	#+ 0.25 * cos((cons.omega1 + cons.omega2 + cons.omega3) * t) + 0.25 * cos((- cons.omega1 + cons.omega2 + cons.omega3) * t) 
+	#+ 0.25 * cos((cons.omega1 - cons.omega2 + cons.omega3) * t) + 0.25 * cos((cons.omega1 + cons.omega2 - cons.omega3) * t))
+	
+	return cos(((cons.omega1 ) * t))
+	#return sin(cons.omega1 * t)
 print("============================================")
 print("Begining Program, setting up calculations")
 time_start = datetime.datetime.now()
@@ -57,7 +60,6 @@ temp_sz3 = []
 
 psi_list = []
 
-
 #Define the operators 
 q1 = tensor(destroy(N),qeye(N),qeye(N))
 q2 = tensor(qeye(N),destroy(N),qeye(N))
@@ -68,19 +70,39 @@ q2d = q2.dag()
 q3d = q3.dag()
 
 #Define the Target Density Matricies
-one  = basis(2,1)
+#one  = (basis(2,0)+(0+1j)*basis(2,1)).unit()
+#zero = (basis(2,0)-(0+1j)*basis(2,1)).unit()
+
+one = basis(2,1)
 zero = basis(2,0)
 
-psi0 = tensor(zero,one,zero)
+#psi0 = tensor(one ,one ,one  )
+#psi0 = tensor(one ,one ,zero )
+#psi0 = tensor(one ,zero,one  ) 
+#psi0 = tensor(one ,zero,zero )
+#psi0 = tensor(zero, one, one )
+#psi0 = tensor(zero,zero,one  )
+#psi0 = tensor(zero,one ,zero )
+psi0 = tensor(zero,zero,zero )
 
-Tdm_111 = tensor(one ,one ,one  )
-Tdm_110 = tensor(one ,one ,zero )
-Tdm_101 = tensor(one ,zero,one  )
-Tdm_011 = tensor(zero,one ,one  )
-Tdm_100 = tensor(one ,zero,zero )
-Tdm_001 = tensor(zero,zero,one  )
-Tdm_010 = tensor(zero,one ,zero )
+
+#Tdm_111 = tensor(one ,one ,one  )
+#Tdm_110 = tensor(one ,one ,zero )
+#Tdm_101 = tensor(one ,zero,one  ) 
+#Tdm_100 = tensor(one ,zero,zero )
+#Tdm_001 = tensor(zero,zero,one  )
+#Tdm_010 = tensor(zero,one ,zero )
+#Tdm_000 = tensor(zero,zero,zero )
+#Tdm_011 = tensor(zero, one, one )
+
+Tdm_111 = tensor(one,zero,zero )
+Tdm_110 = tensor(zero,zero,zero )
+Tdm_101 = tensor(1/sqrt(2) * (one + zero),zero,zero ) 
+Tdm_100 = tensor(1/sqrt(2) * (zero - one),zero,zero )
+Tdm_001 = tensor(1/sqrt(2) * (zero + (0+1j)*one),zero,zero )
+Tdm_010 = tensor(1/sqrt(2) * (zero - (0+1j)*one),zero,zero )
 Tdm_000 = tensor(zero,zero,zero )
+Tdm_011 = tensor(zero,zero,zero )
 
 sz1 = tensor(sigmaz(),qeye(N),qeye(N))
 sz2 = tensor(qeye(N),sigmaz(),qeye(N))
@@ -88,10 +110,10 @@ sz3 = tensor(qeye(N),qeye(N),sigmaz())
 
 
 #operators to be evaluated and collapse operators
-eval_op_list = [q1 * q1.dag(),q2 * q2.dag(),q3 * q3.dag()]
-c_op_list = [0.05*q1,0.05*q2,0.05*q3]
+eval_op_list = [sz1,sz2,sz3]
+c_op_list = [0.01*q1,0.01*q2,0.01*q3,0.02*sz1,0.02*sz2,0.02*sz3]
 
-tlist = np.linspace(0, 300, 1000)
+tlist = np.linspace(0, 1000, 2000)
 
 #import the data
 
@@ -142,15 +164,23 @@ for i in range(0,Notrials):#Ignore the odd for loop and the input stuff this is 
 	H0 += (cons.omega2 * q2d * q2) + (cons.U2 * q2d * q2d * q2 * q2)
 	H0 += (cons.omega3 * q3d * q3) + (cons.U3 * q3d * q3d * q3 * q3)
 
-	H1 += 1  * cons.EJT * (phi1 + phi2 + (phi3))**2
+	H1 += 1 * cons.EJT * (phi1 + phi2 + (2*phi3))
+
+	H1 += 1  * cons.EJT * (phi1 + phi2 + (2*phi3))**2
 
 	H1 += 1 * cons.EJT * phi1 * phi2 * phi3
 	
 	H = [H0,[H1,H1_Coeff_On]]
 	#print(H0)
-	#print(H1)
- 	result = mesolve(H,psi0,tlist,c_op_list,eval_op_list,options = Options(nsteps = 8000,store_states = True))
+	
+ 	result = mesolve(H,psi0,tlist,c_op_list,eval_op_list,options = Options(nsteps = 8000,store_states = True,store_final_state = True))
  	#Will now need to measure and store the results
+
+ 	#b = Bloch()
+ 	#b.add_points(result.expect[0])
+ 	#b.add_states(psi0.ptrace(2))
+ 	#b.add_states(result.final_state.unit().ptrace(2))
+ 	#b.show()
 
  	for j in range(0,len(tlist)):
  		tempfid111.append(fidelity(result.states[j],Tdm_111))
@@ -169,7 +199,7 @@ for i in range(0,Notrials):#Ignore the odd for loop and the input stuff this is 
   	strength = cons.phibar1 * cons.phibar2 * cons.phibar3
   	print(str(strength) + ' ' + str(i))
 
-	Folder_Path = '../Output/RF_05-02-19/' + str(time_start)
+	Folder_Path = '../Output/RF_13-02-19_PM/' + str(time_start)
 
   	createFolder(Folder_Path + "_" + str(i))
 
