@@ -35,5 +35,5 @@ x.append(f1 + f2 - f3)
 x.append(f1 - f2 + f3)
 x.append(-f1 + f2 + f3)
 
-x.sort()
+#x.sort()
 print(x)

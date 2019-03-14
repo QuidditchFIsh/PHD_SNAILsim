@@ -69,7 +69,7 @@ def H1_rot_123_mmm(t,*args):
 
 omega1   = 20
 omega2   = 15
-omega3   = 7
+omega3   = 8
 
 R = 1/sqrt(2) * (sigmay() + sigmaz())
 #R=1
@@ -85,15 +85,20 @@ q3 = tensor(qeye(2),qeye(2),a)
 
 H0  = 0 * tensor(a,a,a)
 
-mult  = 0.1
-mult2 = 0.05
+EJ = 0.01
 
-H = [H0,[q1,H1_rot1],[q1.dag(),H1_rot1d],[q2,H1_rot2],[q2.dag(),H1_rot2d],[q3,H1_rot3],[q3.dag(),H1_rot3d],
-[mult * q1*q2,H1_rot12_pp],[mult * q1*q2.dag(),H1_rot12_pm],[mult * q1.dag()*q2,H1_rot12_mp],[mult * q1.dag()*q2.dag(),H1_rot12_mm],
-[mult * q1*q3,H1_rot13_pp],[mult * q1*q3.dag(),H1_rot13_pm],[mult * q1.dag()*q3,H1_rot13_mp],[mult * q1.dag()*q3.dag(),H1_rot13_mm],
-[mult * q2*q3,H1_rot23_pp],[mult * q2*q3.dag(),H1_rot23_pm],[mult * q2.dag()*q3,H1_rot23_mp],[mult * q2.dag()*q3.dag(),H1_rot23_mm],
-[mult2 * q1*q2*q3,H1_rot_123_ppp],[mult2 * q1*q2*q3.dag(),H1_rot_123_ppm],[mult2 * q1*q2.dag()*q3,H1_rot_123_pmp],[mult2 * q1*q2.dag()*q3.dag(),H1_rot_123_pmm],
-[mult2 * q1.dag()*q2*q3,H1_rot_123_mpp],[mult2 * q1.dag()*q2*q3.dag(),H1_rot_123_mpm],[mult2 * q1.dag()*q2.dag()*q3,H1_rot_123_mmp],[mult2 * q1.dag()*q2.dag()*q3.dag(),H1_rot_123_mmm],]
+mult1a = 3 * EJ
+mult1b =-3 *2 * EJ 
+mult2a = EJ
+mult2b = -2 * EJ
+mult3  = 0.66666 * EJ
+
+H = [H0,[mult1a*q1,H1_rot1],[mult1a*q1.dag(),H1_rot1d],[mult1a*q2,H1_rot2],[mult1a*q2.dag(),H1_rot2d],[mult1b*q3,H1_rot3],[mult1b*q3.dag(),H1_rot3d],
+[mult2a * q1*q2,H1_rot12_pp],[mult2a * q1*q2.dag(),H1_rot12_pm],[mult2a * q1.dag()*q2,H1_rot12_mp],[mult2a * q1.dag()*q2.dag(),H1_rot12_mm],
+[mult2b * q1*q3,H1_rot13_pp],[mult2b * q1*q3.dag(),H1_rot13_pm],[mult2b * q1.dag()*q3,H1_rot13_mp],[mult2b * q1.dag()*q3.dag(),H1_rot13_mm],
+[mult2b * q2*q3,H1_rot23_pp],[mult2b * q2*q3.dag(),H1_rot23_pm],[mult2b * q2.dag()*q3,H1_rot23_mp],[mult2b * q2.dag()*q3.dag(),H1_rot23_mm],
+[mult3 * q1*q2*q3,H1_rot_123_ppp],[mult3 * q1*q2*q3.dag(),H1_rot_123_ppm],[mult3 * q1*q2.dag()*q3,H1_rot_123_pmp],[mult3 * q1*q2.dag()*q3.dag(),H1_rot_123_pmm],
+[mult3 * q1.dag()*q2*q3,H1_rot_123_mpp],[mult3 * q1.dag()*q2*q3.dag(),H1_rot_123_mpm],[mult3 * q1.dag()*q2.dag()*q3,H1_rot_123_mmp],[mult3 * q1.dag()*q2.dag()*q3.dag(),H1_rot_123_mmm],]
 
 
 tlist = np.linspace(0,2**12,2**14)
@@ -173,7 +178,7 @@ idx = np.argwhere(np.diff(np.sign(f - g))).flatten()
 print(idx)
 print(max(f[idx]))
 
-with open(outputstr) as file:
+with open(outputstr,'w') as file:
 	file.write('Simulation Parameters:\n Omega_1=' + str(omega1) +'\n Omega_2=' + str(omega2) + '\n Omega_3=' + str(omega3))
 	file.write('Time Taken =' + str(end-start))
 	file.write('Max Fidelity = ' + str(max(f[ifx]))) 
