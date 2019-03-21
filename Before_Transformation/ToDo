@@ -2,7 +2,6 @@ Git
 keep updating git ignore and clean up git hub stuff
 
 Files
-Create Output file structure 
 
 Comments
 
@@ -14,3 +13,4 @@ a README file would be nice too
 
 Output
 write plotting class to call from main Simulation method
+will probably do all plotting in gnuplot 

@@ -1,11 +1,33 @@
+from math import *
+import matplotlib.pyplot as plt
+import numpy as np
+from qutip import *
+from math import *
+import time
+import Constants as cons
 #Basic definitions
+e = 1.60217662e-19 # Charge on the Electron
+#e = 1
 
-one  = R*basis(2,1)
+h = 6.626070040e-34 #  planks constant
+#h = 1
+
+PI = 3.14159265359 
+
+hbar = h / (2*PI) # reduced planks constant
+
+L = 100e-9 # Inductace 
+
+phi0 = (hbar) / (2 * e) # Quantum of Flux
+
+R = 1/sqrt(2) * (sigmay() + sigmaz()) #Rotation Matrix
+
+one  = R*basis(2,1)#Basis vetors
 zero = R*basis(2,0)
 
-a = R * sigmap() * R
+a = R * sigmap() * R # anhilation operator
 
-i = qeye(2)
+i = qeye(2) # Identity
 
 #Definitions for the frequencies and their strengths
 '''
@@ -19,7 +41,7 @@ E_J1 =
 E_J2 = 
 E_J3 = 
 '''
-E_J = ...
+E_J = 0.1
 phiAC = 0.1
 
 omega1 = 20

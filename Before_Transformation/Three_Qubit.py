@@ -1,12 +1,4 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from qutip import *
 from Constants import *
-from math import *
-import time
-import datetime
-import Constants as cons
-import os
 
 def H1_rot1(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
@@ -85,7 +77,7 @@ coeff2_23_coeff		=-2 		* E_J * phiAC * ((0.5*phiM).cosm() + (0.5*phiM).sinm())
 
 coeff3_coeff    	= 0.666667  * E_J * phiAC * ((0.5*phiM).cosm() + (0.5*phiM).sinm())
 
-H = [H0,[coeff1_12_coeff * q1,H1_rot1],[coeff1_12_coeff * q2,H1_rot1d],[coeff1_12_coeff * q2,H1_rot2],[coeff1_12_coeff * q2,H1_rot2d],[coeff1_3_coeff * q3,H3_rot1],[coeff1_3_coeff * q3,H3_rot1d],
+H = [H0,[coeff1_12_coeff * q1,H1_rot1],[coeff1_12_coeff * q2,H1_rot1d],[coeff1_12_coeff * q2,H1_rot2],[coeff1_12_coeff * q2,H1_rot2d],[coeff1_3_coeff * q3,H1_rot3],[coeff1_3_coeff * q3,H1_rot3d],
 [coeff2_1_coeff  * q1 * q2,H1_rot12_pp],[coeff2_1_coeff  * q1.dag() * q2,H1_rot12_mp],[coeff2_1_coeff  * q1 * q2.dag(),H1_rot12_pm],[coeff2_1_coeff  * q1.dag() * q2.dag(),H1_rot12_mm],
 [coeff2_23_coeff * q1 * q3,H1_rot13_pp],[coeff2_23_coeff * q1.dag() * q3,H1_rot13_mp],[coeff2_23_coeff * q1 * q3.dag(),H1_rot13_pm],[coeff2_23_coeff * q1.dag() * q3.dag(),H1_rot13_mm],
 [coeff2_23_coeff * q2 * q3,H1_rot23_pp],[coeff2_23_coeff * q3.dag() * q3,H1_rot23_mp],[coeff2_23_coeff * q2 * q3.dag(),H1_rot23_pm],[coeff2_23_coeff * q2.dag() * q3.dag(),H1_rot23_mm],
@@ -95,7 +87,7 @@ H = [H0,[coeff1_12_coeff * q1,H1_rot1],[coeff1_12_coeff * q2,H1_rot1d],[coeff1_1
 
 # Set up the calculations
 
-tlist = np.linspace(0,2**10,2**11)
+tlist = np.linspace(0,2**14,2**10)
 
 R=1
 
@@ -119,18 +111,18 @@ today = '21-03-19'
 start = time.time()
 for i in range(0,3):
 	if i == 0:
-		psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
+		psi0 = tensor(zero,zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero,zero)
 		outputstr = 'Output/Data/Toffoli_Real_' + today +'/fidelity000.dat'
 		print('1')
 	if i == 1:
-		psi0 = tensor(one,one,zero);Tdm = tensor(one,one,one)
+		psi0 = tensor(one,one,zero,zero,zero);Tdm = tensor(one,one,one,zero,zero)
 		outputstr = 'Output/Data/Toffoli_Real_' + today +'/fidelity110.dat'
 		print('2')
 	if i == 2:
-		psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
+		psi0 = tensor(one,one,one,zero,zero);Tdm = tensor(one,one,zero,zero,zero)
 		outputstr = 'Output/Data/Toffoli_Real_' + today +'/fidelity111.dat'
 		print('3')
-		
+
 	result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2,sx3,sy3,sz3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 
 
