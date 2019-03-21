@@ -19,12 +19,14 @@ E_J1 =
 E_J2 = 
 E_J3 = 
 '''
+E_J = ...
+phiAC = 0.1
 
 omega1 = 20
 omega2 = 15
 omega3 = 8
-omegaP =
-omegaM =
+omegaP = 0.1
+omegaM = 0.1
 
 phi_Bar1 = 0.656
 phi_Bar2 = 0.568
