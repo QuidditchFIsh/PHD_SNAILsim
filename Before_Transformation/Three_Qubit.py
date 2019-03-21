@@ -68,6 +68,8 @@ def H1_rot_123_mmm(t,*args):
 
 #All of the variables defined wihtin the constants class now write the hamiltonian 
 
-#beginning with the 
+#beginning with the Time independant Hamiltonian
+
+H = 
 
 
