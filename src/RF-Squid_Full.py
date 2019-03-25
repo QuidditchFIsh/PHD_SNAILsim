@@ -82,13 +82,14 @@ for n in range(4):
     psi_list.append(basis(2,0))
 psi0 = tensor(psi_list)
 
-#collapse operator list
-c_op_list = [q1,q2,q3]
 
 #operators to be evaulated
 sz1 = tensor(sigmaz(),qeye(N),qeye(N),qeye(N),qeye(N))
 sz2 = tensor(qeye(N),sigmaz(),qeye(N),qeye(N),qeye(N))
 sz3 = tensor(qeye(N),qeye(N),sigmaz(),qeye(N),qeye(N))
+
+#collapse operator list
+c_op_list = [0.01*q1,0.01*q2,0.01*q3,0.01*sz1,0.01*sz2,0.01*sz3]
 
 avg_sz1 = []
 avg_sz2 = []

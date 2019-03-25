@@ -38,9 +38,9 @@ phibar3 = 0.554480114968
 #phibarP = 0
 #phibarM = 0
 
-omega1 = 35
-omega2 = 105
-omega3 = 176
+omega1 = 20
+omega2 = 15
+omega3 = 8
 
 U1 = 0.939
 U2 = 1.79497

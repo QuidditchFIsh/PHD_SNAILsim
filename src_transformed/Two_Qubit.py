@@ -31,8 +31,8 @@ def H1_rotmm(t,*args):
 	return (cos(omegad1 * t + 0.5*PI) + cos(omegad2*t + 0.5*PI) + 1*cos(omegad3*t + 0.5*0) + 1*cos(omegad4*t+ 0.5*PI))*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )
 
 
-omega1 = 11
-omega2 = 19
+omega1 = 10
+omega2 = 23
 omegad1 = omega1 + omega2
 omegad2 = omega1 - omega2
 omegad3 = omega1
@@ -51,14 +51,11 @@ q2 = tensor(qeye(2),a)
 
 H0  = 0 * tensor(a,a)
 
-H = [H0,[q1,H1_rot1],[q1.dag(),H1_rot1d],[q2,H1_rot2],[q2.dag(),H1_rot2d],[q1*q2,H1_rotpp],[q1*q2.dag(),H1_rotpm],[q1.dag()*q2,H1_rotmp],[q1.dag()*q2.dag(),H1_rotmm]]
+g = 0.05
 
-#psi0 = tensor(zero,zero);Tdm = tensor(zero,zero)
-#psi0 = tensor(zero,one);Tdm = tensor(zero,one)
-#psi0 = tensor(one,zero);Tdm = tensor(one,one)
-psi0 = tensor(one,one);Tdm = tensor(one,zero)
+H = [H0,[q1,H1_rot1],[q1.dag(),H1_rot1d],[q2,H1_rot2],[q2.dag(),H1_rot2d],[g * q1*q2,H1_rotpp],[g * q1*q2.dag(),H1_rotpm],[g * q1.dag()*q2,H1_rotmp],[g * q1.dag()*q2.dag(),H1_rotmm]]
 
-tlist = np.linspace(0,4*PI,1000)
+tlist = np.linspace(0,2**9,2**10)
 R=1
 sx1 = tensor(R * sigmax() * R,qeye(2))
 sx2 = tensor(qeye(2), R * sigmax() * R)
@@ -71,50 +68,80 @@ sz2 = tensor(qeye(2), R * sigmaz() * R)
 
 c_ops = [0.001*q1,0.001*q2,0.002*sz1,0.002*sz2]
 
-result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+freqs = np.genfromtxt('Frequencies2')
 
-fig, ax = plt.subplots(figsize=(12,6))
-ax.plot(tlist, np.real(result.expect[0]), 'r')
-ax.plot(tlist, np.real(result.expect[3]), 'b')
-ax.legend(("sx1", "sx2"))
-ax.set_xlabel('Time')
-ax.set_ylabel('expectation value')
+start = time.time()
+Max_minFid = []
+for j in freqs:
+	print(j)
+	for i in range(0,4):
+		omega1 = j[0]
+		omega2 = j[1]
+		omegad1 = omega1 + omega2
+		omegad2 = omega1 - omega2
+		omegad3 = omega1
+		omegad4 = omega2
+		if i == 0:
+			psi0 = tensor(zero,zero);Tdm = tensor(zero,zero)
+			outputstr = 'Output/CNOT_18-03-19/fidelity00-' + str(omega1) + '_' + str(omega2) + '.dat'
+			#print('1')
+		if i == 1:
+			psi0 = tensor(zero,one);Tdm = tensor(zero,one)
+			outputstr = 'Output/CNOT_18-03-19/fidelity10-' + str(omega1) + '_' + str(omega2) + '.dat'
+			#print('2')
+		if i == 2:
+			psi0 = tensor(one,zero);Tdm = tensor(one,one)
+			outputstr = 'Output/CNOT_18-03-19/fidelity01-' + str(omega1) + '_' + str(omega2) + '.dat'
+			#print('3')
+		if i == 3:
+			psi0 = tensor(one,one);Tdm = tensor(one,zero)
+			outputstr = 'Output/CNOT_18-03-19/fidelity11-' + str(omega1) + '_' + str(omega2) + '.dat'
+			#print('4')
 
-#plt.show()#
-
-sphere=Bloch()
-sphere.add_points([result.expect[0],result.expect[1],result.expect[2]], meth='l')
-sphere.vector_color = ['r']
-#sphere.add_vectors([np.sin(theta), 0, np.cos(theta)])
-#phere.show()
-
-fig1, ax1= plt.subplots(figsize=(12,6))
-ax1.plot(tlist, np.real(result.expect[1]), 'r')
-ax1.plot(tlist, np.real(result.expect[4]), 'b')
-ax1.legend(("sy1", "sy2"))
-ax1.set_xlabel('Time')
-ax1.set_ylabel('expectation value')
-
-fig2, ax2 = plt.subplots(figsize=(12,6))
-ax2.plot(tlist, np.real(result.expect[2]), 'r')
-ax2.plot(tlist, np.real(result.expect[5]), 'b')
-ax2.legend(("sz1", "sz2"))
-ax2.set_xlabel('Time')
-ax2.set_ylabel('expectation value')
-
-#plt.show()
-
-sphere1=Bloch()
-sphere1.add_points([result.expect[3],result.expect[4],result.expect[5]], meth='l')
-sphere1.vector_color = ['r']
-#sphere.add_vectors([np.sin(theta), 0, np.cos(theta)])
-#sphere1.show()
+		result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 
 
-fidelity_dat = []
-for j in range(0,len(tlist)):
- 		fidelity_dat.append(fidelity(result.states[j],Tdm))
+		fidelity_dat = []
+		for k in range(0,len(tlist)):
+		 		fidelity_dat.append(fidelity(result.states[k],Tdm))
 
-with open('../Output/testing/fidelity11.dat','w') as f1:
-	for j in fidelity_dat:
-		f1.write(str(j) + "\n")
+		with open(outputstr,'w') as f1:
+			for k in fidelity_dat:
+				f1.write(str(k) + "\n")
+
+
+	x11 = np.genfromtxt('Output/CNOT_18-03-19/fidelity11-' + str(omega1) + '_' + str(omega2) + '.dat')
+	x10 = np.genfromtxt('Output/CNOT_18-03-19/fidelity10-' + str(omega1) + '_' + str(omega2) + '.dat')
+	x01 = np.genfromtxt('Output/CNOT_18-03-19/fidelity01-' + str(omega1) + '_' + str(omega2) + '.dat')
+	x00 = np.genfromtxt('Output/CNOT_18-03-19/fidelity00-' + str(omega1) + '_' + str(omega2) + '.dat')
+
+
+	tmp = []
+	Min = []
+
+	for k in range(0,len(x11)):
+		tmp.append(x11[k])
+		tmp.append(x10[k])
+		tmp.append(x01[k])
+		tmp.append(x00[k])
+		Min.append(min(tmp))
+		tmp = []
+	#print('Fidelity Achieved:' + str(max(Min)))
+	Max_minFid.append(max(Min))
+
+	outputstr = 'Output/CNOT_18-03-19/Minimum-' + str(omega1) + '_' + str(omega2) + '.dat'
+
+	with open(outputstr,'w') as f2:
+		for k in Min:
+			f2.write(str(k) + "\n")
+
+end = time.time()
+print('Time Taken for Simulation:')
+print(end - start)
+
+outputstr = 'Output/CNOT_18-03-19/__Max_Fidelity__.dat'
+
+with open(outputstr,'w') as f3:
+	for k in Max_minFid:
+		f3.write(str(k) + "\n")
+

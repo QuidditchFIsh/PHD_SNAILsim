@@ -47,8 +47,8 @@ phiAC = 0.1
 omega1 = 20
 omega2 = 15
 omega3 = 8
-omegaP = 0.1
-omegaM = 0.1
+omegaP = 50
+omegaM = 10
 
 phi_Bar1 = 0.656
 phi_Bar2 = 0.568

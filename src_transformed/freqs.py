@@ -1,6 +1,6 @@
 f1 = 20
 f2 = 15
-f3 = 7
+f3 = 8
 
 print(f1)
 print(f2)
@@ -35,5 +35,5 @@ x.append(f1 + f2 - f3)
 x.append(f1 - f2 + f3)
 x.append(-f1 + f2 + f3)
 
-#x.sort()
+x.sort()
 print(x)
