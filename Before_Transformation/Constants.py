@@ -48,7 +48,7 @@ omega1 		= 20
 omega2 		= 15
 omega3 		= 8
 omegaP 		= 50
-omegaM 		= 10
+omegaM 		= 0.1
 
 phi_Bar1 	= 0.656
 phi_Bar2 	= 0.568
@@ -61,17 +61,17 @@ U2 			= 3.27
 U3			= 1.04
 
 #Begin by defining all of tge variables to use
-Identity 	= tensor(i,i,i,i,i)
-q1 			= tensor(a,i,i,i,i)
-q2 			= tensor(i,a,i,i,i)
-q3 			= tensor(i,i,a,i,i)
-sP 			= tensor(i,i,i,a,i)
-sM 			= tensor(i,i,i,i,a)
+Identity 	= tensor(i,i,i,i)
+q1 			= tensor(a,i,i,i)
+q2 			= tensor(i,a,i,i)
+q3 			= tensor(i,i,a,i)
+sM 			= tensor(i,i,i,a)
+#sM 			= tensor(i,i,i,i,a)
 
 phi1 = phi_Bar1 * (q1 + q1.dag())
 phi2 = phi_Bar2 * (q2 + q2.dag())
 phi3 = phi_Bar3 * (q3 + q3.dag())
 phiM = phi_BarP * (sM + sM.dag())
-phi1 = phi_BarM * (q1 + q1.dag())
+#phiP = phi_BarP * (sP + sP.dag())
 
 phi_qM = (phi1 + phi2 - 2*phi3)
