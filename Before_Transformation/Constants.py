@@ -1,77 +1,37 @@
 from math import *
-import matplotlib.pyplot as plt
-import numpy as np
 from qutip import *
-from math import *
-import time
-import Constants as cons
-#Basic definitions
-e 		= 1.60217662e-19 # Charge on the Electron
-#e = 1
+PI = 3.14159265359 
 
-h 		= 6.626070040e-34 #  planks constant
-#h = 1
+omega1   = 20
+omega2   = 15
+omega3   = 8
 
-PI 		= 3.14159265359 
+omegaM = 31
+omegaP = 10
 
-hbar 	= h / (2*PI) # reduced planks constant
+R = 1/sqrt(2) * (sigmay() + sigmaz())
 
-L 		= 100e-9 # Inductace 
+one  = R*basis(2,1)
+zero = R*basis(2,0)
 
-phi0	= (hbar) / (2 * e) # Quantum of Flux
+a = R * sigmap() * R
 
-R 		= 1/sqrt(2) * (sigmay() + sigmaz()) #Rotation Matrix
+identity 
 
-one  	= R*basis(2,1)#Basis vetors
-zero 	= R*basis(2,0)
+q1 = tensor(a, qeye(2),qeye(2),qeye(2),qeye(2))
+q2 = tensor(qeye(2),a,qeye(2),qeye(2),qeye(2))
+q3 = tensor(qeye(2),qeye(2),a,qeye(2),qeye(2))
+sM = tensor(qeye(2),qeye(2),qeye(2),sigmap(),qeye(2))
+sP = tensor(qeye(2),qeye(2),qeye(2),qeye(2),sigmap())
 
-a 		= R * sigmap() * R # anhilation operator
+sx1 = tensor(sigmax(),qeye(2),qeye(2),qeye(2),qeye(2))
+sx2 = tensor(qeye(2),  sigmax() ,qeye(2),qeye(2),qeye(2))
+sx3 = tensor(qeye(2),qeye(2),  sigmax() ,qeye(2),qeye(2))
 
-i 		= qeye(2) # Identity
+sy1 = tensor( sigmay() ,qeye(2),qeye(2),qeye(2),qeye(2))
+sy2 = tensor(qeye(2),  sigmay() ,qeye(2),qeye(2),qeye(2))
+sy3 = tensor(qeye(2),qeye(2),  sigmay() ,qeye(2),qeye(2))
 
-#Definitions for the frequencies and their strengths
-'''
-E_L = 
-
-E_CQ1 = 
-E_CQ2 = 
-E_CQ3 = 
-
-E_J1 = 
-E_J2 = 
-E_J3 = 
-'''
-E_J 		= 0.1
-phiAC 		= 0.1
-
-omega1 		= 20
-omega2 		= 15
-omega3 		= 8
-omegaP 		= 50
-omegaM 		= 0.1
-
-phi_Bar1 	= 0.656
-phi_Bar2 	= 0.568
-phi_Bar3 	= 0.414
-phi_BarP 	= 1.65 # placeholder check this value
-phi_BarM 	= 1.65 # placeholder check this value
-
-U1			= 5.8
-U2 			= 3.27
-U3			= 1.04
-
-#Begin by defining all of tge variables to use
-Identity 	= tensor(i,i,i,i)
-q1 			= tensor(a,i,i,i)
-q2 			= tensor(i,a,i,i)
-q3 			= tensor(i,i,a,i)
-sM 			= tensor(i,i,i,a)
-#sM 			= tensor(i,i,i,i,a)
-
-phi1 = phi_Bar1 * (q1 + q1.dag())
-phi2 = phi_Bar2 * (q2 + q2.dag())
-phi3 = phi_Bar3 * (q3 + q3.dag())
-phiM = phi_BarP * (sM + sM.dag())
-#phiP = phi_BarP * (sP + sP.dag())
-
-phi_qM = (phi1 + phi2 - 2*phi3)
+sz1 = tensor( sigmaz() ,qeye(2),qeye(2),qeye(2),qeye(2))
+sz2 = tensor(qeye(2),  sigmaz() ,qeye(2),qeye(2),qeye(2))
+sz3 = tensor(qeye(2),qeye(2),  sigmaz() ,qeye(2),qeye(2))
