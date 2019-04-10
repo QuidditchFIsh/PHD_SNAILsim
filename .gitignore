@@ -6,5 +6,5 @@
 .png
 .pdf
 
-/LookUp\ Table/*.dat
-
+LookUp\ Table/*.dat
+Output/
