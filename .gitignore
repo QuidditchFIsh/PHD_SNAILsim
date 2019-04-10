@@ -5,3 +5,6 @@
 #All picture files
 .png
 .pdf
+
+/LookUp\ Table/*.dat
+
