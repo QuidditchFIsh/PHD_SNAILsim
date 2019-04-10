@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from qutip import *
-from Constants import *
 from math import *
 import time
 import datetime
-import Constants as cons
 import os
+from Constants import *
 
 def H1_rot1(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
@@ -69,19 +68,26 @@ def H1_rot_123_mmm(t,*args):
 
 omega1   = 20
 omega2   = 15
-omega3   = 7
+omega3   = 8
 
-R = 1/sqrt(2) * (sigmay() + sigmaz())
+X = jmat(1,'x')
+Y = jmat(1,'y')
+Z = jmat(1,'z')
+
+#R = 1/sqrt(2) * (Y + Z)
+R = 1/sqrt(2) * Qobj([[1+0j,0-1j,0],[0+1j,-1+0j,0],[0,0,1]])
+
 #R=1
 
-one  = R*basis(2,1)
-zero = R*basis(2,0)
+one  = R * basis(3,1)
+zero = R * basis(3,0)
+two  = R * basis(3,2)
 
-a = R * sigmap() * R
+a = R * destroy(3) * R
 
-q1 = tensor(a, qeye(2),qeye(2))
-q2 = tensor(qeye(2),a,qeye(2))
-q3 = tensor(qeye(2),qeye(2),a)
+q1 = tensor(a, qeye(3),qeye(3))
+q2 = tensor(qeye(3),a,qeye(3))
+q3 = tensor(qeye(3),qeye(3),a)
 
 H0  = 0 * tensor(a,a,a)
 
@@ -95,35 +101,36 @@ H = [H0,[q1,H1_rot1],[q1.dag(),H1_rot1d],[q2,H1_rot2],[q2.dag(),H1_rot2d],[q3,H1
 [mult2 * q1*q2*q3,H1_rot_123_ppp],[mult2 * q1*q2*q3.dag(),H1_rot_123_ppm],[mult2 * q1*q2.dag()*q3,H1_rot_123_pmp],[mult2 * q1*q2.dag()*q3.dag(),H1_rot_123_pmm],
 [mult2 * q1.dag()*q2*q3,H1_rot_123_mpp],[mult2 * q1.dag()*q2*q3.dag(),H1_rot_123_mpm],[mult2 * q1.dag()*q2.dag()*q3,H1_rot_123_mmp],[mult2 * q1.dag()*q2.dag()*q3.dag(),H1_rot_123_mmm]]
 
-tlist = np.linspace(0,2**9,2**9)
+tlist = np.linspace(0,2**10,2**10)
+
 R=1
-sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2))
-sx2 = tensor(qeye(2), R * sigmax() * R,qeye(2))
-sx3 = tensor(qeye(2),qeye(2), R * sigmax() * R)
+sx1 = tensor(R * X * R,qeye(3),qeye(3))
+sx2 = tensor(qeye(3), R * X * R,qeye(3))
+sx3 = tensor(qeye(3),qeye(3), R * X * R)
 
-sy1 = tensor(R * sigmay() * R,qeye(2),qeye(2))
-sy2 = tensor(qeye(2), R * sigmay() * R,qeye(2))
-sy3 = tensor(qeye(2),qeye(2), R * sigmay() * R)
+sy1 = tensor(R * Y * R,qeye(3),qeye(3))
+sy2 = tensor(qeye(3), R * Y * R,qeye(3))
+sy3 = tensor(qeye(3),qeye(3), R * Y * R)
 
-sz1 = tensor(R * sigmaz() * R,qeye(2),qeye(2))
-sz2 = tensor(qeye(2), R * sigmaz() * R,qeye(2))
-sz3 = tensor(qeye(2),qeye(2), R * sigmaz() * R)
+sz1 = tensor(R * Z * R,qeye(3),qeye(3))
+sz2 = tensor(qeye(3), R * Z * R,qeye(3))
+sz3 = tensor(qeye(3),qeye(3), R * Z * R)
 
 c_ops = [0.001*q1,0.001*q2,0.001*q3,0.002*sz1,0.002*sz2,0.002*sz3]
 
 outputstr = ''
 
 
-for i in range(0,3):
+for i in range(0,1):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
-		outputstr = 'Output/Toffoli_28-03-19/fidelity000.dat'
+		outputstr = 'Output/Toffoli_28-03-19/'
 	if i == 1:	
 		psi0 = tensor(one,one,zero);Tdm = tensor(one,one,one)
-		outputstr = 'Output/Toffoli_28-03-19/fidelity110.dat'
+		outputstr = 'Output/Toffoli_28-03-19/'
 	if i == 2:
 		psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
-		outputstr = 'Output/Toffoli_28-03-19/fidelity111.dat'
+		outputstr = 'Output/Toffoli_28-03-19/'
 	'''
 	if i == 3:
 		psi0 = tensor(zero,one,one);Tdm = tensor(zero,one,one)
@@ -142,13 +149,89 @@ for i in range(0,3):
 		outputstr = 'Output/Toffoli_13-02-19/fidelity111.dat'
 	'''
 
-	result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2,sx3,sy3,sz3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+	#print(psi0)
+
+	result = mesolve(H,psi0,tlist,c_ops,[sy1,sy2,sy3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 
 
 	fidelity_dat = []
+
+	Qubit_state_1_0 = []
+	Qubit_state_1_1 = []
+	Qubit_state_1_2 = []
+
+	Qubit_state_2_0 = []
+	Qubit_state_2_1 = []
+	Qubit_state_2_2 = []
+
+	Qubit_state_3_0 = []
+	Qubit_state_3_1 = []
+	Qubit_state_3_2 = []
+
+	Expect_sz1 = []
+	Expect_sz2 = []
+	Expect_sz3 = []
+
+	#print(result.states[0])
+
 	for j in range(0,len(tlist)):
 	 		fidelity_dat.append(fidelity(result.states[j],Tdm))
+	 		Qubit_state_1_0.append(expect(result.states[j].ptrace(0),zero))
+	 		Qubit_state_1_1.append(expect(result.states[j].ptrace(0),one))
+	 		Qubit_state_1_2.append(expect(result.states[j].ptrace(0),two))
 
-	with open(outputstr,'w') as f1:
+	 		Qubit_state_2_0.append(expect(result.states[j].ptrace(1),zero))
+	 		Qubit_state_2_1.append(expect(result.states[j].ptrace(1),one))
+	 		Qubit_state_2_2.append(expect(result.states[j].ptrace(1),two))
+
+	 		Qubit_state_3_0.append(expect(result.states[j].ptrace(2),zero))
+	 		Qubit_state_3_1.append(expect(result.states[j].ptrace(2),one))
+	 		Qubit_state_3_2.append(expect(result.states[j].ptrace(2),two))
+
+	 		Expect_sz1.append(result.expect[0][j])
+			Expect_sz2.append(result.expect[1][j])
+			Expect_sz3.append(result.expect[2][j])
+
+	with open(outputstr + 'Qubit_state_1_0.dat','w') as f1:
+		for j in Qubit_state_1_0:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Qubit_state_1_1.dat','w') as f1:
+		for j in Qubit_state_1_1:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Qubit_state_1_2.dat','w') as f1:
+		for j in Qubit_state_1_2:
+			f1.write(str(j) + "\n")
+
+	with open(outputstr + 'Qubit_state_2_0.dat','w') as f1:
+		for j in Qubit_state_2_0:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Qubit_state_2_1.dat','w') as f1:
+		for j in Qubit_state_2_1:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Qubit_state_2_2.dat','w') as f1:
+		for j in Qubit_state_2_2:
+			f1.write(str(j) + "\n")
+
+	with open(outputstr + 'Qubit_state_3_0.dat','w') as f1:
+		for j in Qubit_state_3_0:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Qubit_state_3_1.dat','w') as f1:
+		for j in Qubit_state_3_1:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Qubit_state_3_2.dat','w') as f1:
+		for j in Qubit_state_3_2:
+			f1.write(str(j) + "\n")
+
+	with open(outputstr + 'Fidelity.dat','w') as f1:
 		for j in fidelity_dat:
+			f1.write(str(j) + "\n")
+
+	with open(outputstr + 'Expect_sz1.dat','w') as f1:
+		for j in Expect_sz1:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Expect_sz2.dat','w') as f1:
+		for j in Expect_sz2:
+			f1.write(str(j) + "\n")
+	with open(outputstr + 'Expect_sz3.dat','w') as f1:
+		for j in Expect_sz3:
 			f1.write(str(j) + "\n")

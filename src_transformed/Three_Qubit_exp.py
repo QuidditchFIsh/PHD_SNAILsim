@@ -7,7 +7,7 @@ import time
 import datetime
 import Constants as cons
 import os
-'''
+
 def H1_rot1(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
 def H1_rot1d(t,*args):
@@ -123,7 +123,7 @@ def H1_rot_123_mmp(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
 def H1_rot_123_mmm(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
-
+'''
 
 omega1 	= 20
 omega2 	= 15
@@ -143,7 +143,7 @@ q2 = tensor(qeye(2),a,qeye(2))
 q3 = tensor(qeye(2),qeye(2),a)
 
 EJ = 0.05
-H0 = (omega1 * q1.dag()*q1 + omega2 * q2.dag()*q2 + omega3 * q3.dag()*q3)
+H0 = 0*(omega1 * q1.dag()*q1 + omega2 * q2.dag()*q2 + omega3 * q3.dag()*q3)
 '''
 H = [H0,[EJ*q1,H1_test1],[EJ*q1.dag(),H1_test1d],[EJ*q2,H1_test1],[EJ*q2.dag(),H1_test1d],[EJ*q3,H1_test1],[EJ*q3.dag(),H1_test1d],
 [EJ * q1*q2,H1_test1],[EJ * q1*q2.dag(),H1_test1],[EJ * q1.dag()*q2,H1_test1],[EJ * q1.dag()*q2.dag(),H1_test1],
