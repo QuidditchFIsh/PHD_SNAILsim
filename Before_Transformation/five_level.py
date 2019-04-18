@@ -81,15 +81,19 @@ sM 			= tensor(i,i,i,a)
 
 phiM = 0.05 * (sM + sM.dag())
 
-omega1 		= 20
-omega2 		= 15
-omega3 		= 8
-omegaP 		= 50
-omegaM 		= 10
+omega1 		= 4
+omega2 		= 10
+omega3 		= 17
+omegaP 		= 35
+omegaM 		= 8.5
 
-U1			= 5.8
-U2 			= 3.27
-U3			= 1.04
+#U1			= 5.8
+#U2 			= 3.27
+#U3			= 1.04
+
+U1			= 0
+U2 			= 0
+U3			= 0
 
 E_J 		= 0.1
 phiAC 		= 0.1
@@ -135,7 +139,7 @@ H = [H0,[coeff1_12_coeff * q1,H1_rot1],[coeff1_12_coeff * q2,H1_rot1d],[coeff1_1
 [coeff3_coeff * q1.dag() * q2.dag() * q3.dag(),H1_rot_123_mmm]]
 
 
-tlist = np.linspace(0,2**9,2**9)
+tlist = np.linspace(0,2000,2**9)
 
 sx1 = tensor(R 		* sigmax() * R,i,i,i)
 sx2 = tensor(i, R 	* sigmax() * R,i,i)
@@ -170,7 +174,7 @@ for j in range(0,len(tlist)):
  		#print(result.states[j].ptrace(2))
 
 with open(outputstr,'w') as f1:
-	for j in fidelity_dat:
+	for j in result.expect[9]:
 		f1.write(str(j) + "\n")
 for j in result.expect[9]:
 	print(j)
