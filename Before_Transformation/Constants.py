@@ -16,6 +16,9 @@ zero = R*basis(2,0)
 
 a = R * sigmap() * R
 
+U1 = 1.5
+U2 = 1.5
+U3 = 1.5
 #identity 
 
 q1 = tensor(a, qeye(2),qeye(2),qeye(2),qeye(2))
@@ -32,6 +35,7 @@ sy1 = tensor( sigmay() ,qeye(2),qeye(2),qeye(2),qeye(2))
 sy2 = tensor(qeye(2),  sigmay() ,qeye(2),qeye(2),qeye(2))
 sy3 = tensor(qeye(2),qeye(2),  sigmay() ,qeye(2),qeye(2))
 sy4 = tensor(qeye(2),qeye(2),qeye(2),  sigmay() ,qeye(2))
+sy5 = tensor(qeye(2),qeye(2),qeye(2),qeye(2),  sigmay())
 
 sz1 = tensor( sigmaz() ,qeye(2),qeye(2),qeye(2),qeye(2))
 sz2 = tensor(qeye(2),  sigmaz() ,qeye(2),qeye(2),qeye(2))

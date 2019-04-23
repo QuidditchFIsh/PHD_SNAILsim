@@ -5,8 +5,6 @@ from Constants import *
 from math import *
 import time
 import datetime
-import Constants as cons
-import os
 
 def H1_rot1(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
@@ -79,9 +77,9 @@ zero = R*basis(2,0)
 
 a = R * sigmap() * R
 
-q1 = tensor(a, qeye(2),qeye(2))
-q2 = tensor(qeye(2),a,qeye(2))
-q3 = tensor(qeye(2),qeye(2),a)
+q1 = 0.5*tensor(a, qeye(2),qeye(2))
+q2 = 0.5*tensor(qeye(2),a,qeye(2))
+q3 = 0.5*tensor(qeye(2),qeye(2),a)
 
 H0  = 0 * tensor(a,a,a)
 
@@ -106,7 +104,7 @@ H = [H0,
 [mult123 *  q1*q2*q3,H1_rot_123_ppp],[mult123 *  q1*q2*q3.dag(),H1_rot_123_ppm],[mult123 *  q1*q2.dag()*q3,H1_rot_123_pmp],[mult123 *  q1*q2.dag()*q3.dag(),H1_rot_123_pmm],
 [mult123 *  q1.dag()*q2*q3,H1_rot_123_mpp],[mult123 *  q1.dag()*q2*q3.dag(),H1_rot_123_mpm],[mult123 *  q1.dag()*q2.dag()*q3,H1_rot_123_mmp],[mult123 *  q1.dag()*q2.dag()*q3.dag(),H1_rot_123_mmm]]
 
-tlist = np.linspace(0,2**7,2**7)
+tlist = np.linspace(0,2000,2000)
 R=1
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2))
 sx2 = tensor(qeye(2), R * sigmax() * R,qeye(2))
@@ -125,33 +123,40 @@ c_ops = [0.001*q1,0.001*q2,0.001*q3,0.002*sz1,0.002*sz2,0.002*sz3]
 outputstr = ''
 
 
-for i in range(0,3):
+for i in range(0,8):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
-		outputstr = 'Output/Toffoli_18-04-19/fidelity000.dat'
+		outputstr = 'Output/Toffoli_23-04-19/fidelity000.dat'
+		print('000')
 	if i == 1:	
-		psi0 = tensor(one,one,zero);Tdm = tensor(one,one,one)
-		outputstr = 'Output/Toffoli_18-04-19/fidelity110.dat'
+		psi0 = tensor(zero,zero,one);Tdm = tensor(zero,zero,one)
+		outputstr = 'Output/Toffoli_23-04-19/fidelity001.dat'
+		print('001')
 	if i == 2:
-		psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
-		outputstr = 'Output/Toffoli_18-04-19/fidelity111.dat'
-	'''
+		psi0 = tensor(zero,one,zero);Tdm = tensor(zero,one,zero)
+		outputstr = 'Output/Toffoli_23-04-19/fidelity010.dat'
+		print('010')
 	if i == 3:
 		psi0 = tensor(zero,one,one);Tdm = tensor(zero,one,one)
-		outputstr = 'Output/Toffoli_13-02-19/fidelity011.dat'
+		outputstr = 'Output/Toffoli_23-04-19/fidelity011.dat'
+		print('011')
 	if i == 4:
 		psi0 = tensor(one,zero,zero);Tdm = tensor(one,zero,zero)
-		outputstr = 'Output/Toffoli_13-02-19/fidelity100.dat'
+		outputstr = 'Output/Toffoli_23-04-19/fidelity100.dat'
+		print('100')
 	if i == 5:
 		psi0 = tensor(one,zero,one);Tdm = tensor(one,zero,one)
-		outputstr = 'Output/Toffoli_13-02-19/fidelity101.dat'
+		outputstr = 'Output/Toffoli_23-04-19/fidelity101.dat'
+		print('101')
 	if i == 6:
 		psi0 = tensor(one,one,zero);Tdm = tensor(one,one,one)
-		outputstr = 'Output/Toffoli_13-02-19/fidelity110.dat'
+		outputstr = 'Output/Toffoli_23-04-19/fidelity110.dat'
+		print('110')
 	if i == 7:
 		psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
-		outputstr = 'Output/Toffoli_13-02-19/fidelity111.dat'
-	'''
+		outputstr = 'Output/Toffoli_23-04-19/fidelity111.dat'
+		print('111')
+	
 
 	result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2,sx3,sy3,sz3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 

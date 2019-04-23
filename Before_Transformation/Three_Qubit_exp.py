@@ -58,16 +58,16 @@ outputstr = ''
 for i in range(0,3):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero,zero)
-		outputstr = 'Output/Toffoli_18-04-19/one/'
+		outputstr = 'Output/Toffoli_23-04-19/one/'
 		print('1')
 	if i == 1:	
 		psi0 = tensor(one,one,zero,zero,zero);Tdm = tensor(one,one,one,zero,zero)
-		outputstr = 'Output/Toffoli_18-04-19/two/'
-		print('1')
+		outputstr = 'Output/Toffoli_23-04-19/two/'
+		print('2')
 	if i == 2:
 		psi0 = tensor(one,one,one,zero,zero);Tdm = tensor(one,one,zero,zero,zero)
-		outputstr = 'Output/Toffoli_18-04-19/three/'
-		print('1')
+		outputstr = 'Output/Toffoli_23-04-19/three/'
+		print('3')
 	'''
 	if i == 3:
 		psi0 = tensor(zero,one,one);Tdm = tensor(zero,one,one)
@@ -86,7 +86,7 @@ for i in range(0,3):
 		outputstr = 'Output/Toffoli_13-02-19/fidelity111.dat'
 	'''
 
-	result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2,sx3,sy3,sz3,sy4],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+	result = mesolve(H,psi0,tlist,c_ops,[sx1,sy1,sz1,sx2,sy2,sz2,sx3,sy3,sz3,sy4,sy5],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 	
 	fidelity_dat = []
 
@@ -110,6 +110,7 @@ for i in range(0,3):
 	Expect_sz2 = []
 	Expect_sz3 = []
 	Expect_sz4 = []
+	Expect_sz5 = []
 
 	for j in range(0,len(tlist)):
 		fidelity_dat.append(fidelity(result.states[j],Tdm))
@@ -122,8 +123,8 @@ for i in range(0,3):
 		Qubit_state_3_0.append(expect(result.states[j].ptrace(2),zero))
 		Qubit_state_3_1.append(expect(result.states[j].ptrace(2),one))
 
-		Qubit_state_4_0.append(expect(result.states[j].ptrace(3),zero))
-		Qubit_state_4_1.append(expect(result.states[j].ptrace(3),one))
+		Qubit_state_4_0.append(expect(result.states[j].ptrace(3),zero).real)
+		Qubit_state_4_1.append(expect(result.states[j].ptrace(3),one).real)
 
 		Qubit_state_5_0.append(expect(result.states[j].ptrace(4),zero))
 		Qubit_state_5_1.append(expect(result.states[j].ptrace(4),one))
@@ -132,6 +133,7 @@ for i in range(0,3):
 		Expect_sz2.append(result.expect[5][j])
 		Expect_sz3.append(result.expect[8][j])
 		Expect_sz4.append(result.expect[9][j])
+		Expect_sz5.append(result.expect[10][j])
 
 
 
@@ -186,4 +188,7 @@ for i in range(0,3):
                         f1.write(str(j) + "\n")
         with open(outputstr + 'Expect_sz4.dat','w') as f1:
                 for j in Expect_sz4:
+                        f1.write(str(j) + "\n")
+        with open(outputstr + 'Expect_sz5.dat','w') as f1:
+                for j in Expect_sz5:
                         f1.write(str(j) + "\n")
