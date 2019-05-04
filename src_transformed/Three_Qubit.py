@@ -6,7 +6,13 @@ from math import *
 import time
 import datetime
 
+
+
+((-1*cos(omega3 * t) + 2*cos(omega2*t + 0.5*PI) + 2*cos(omega1 * t + 0.5*PI) + 4*cos((omega1 + omega2)*t) - 4*cos((omega1 - omega2)*t) + 2*cos((omega1 + omega3)*t + 0.5*PI) + 2*cos((omega1-omega2)*t) + 2*cos((omega2 + omega3)*t) + 2*cos((omega2 - omega3)*t) - 4*cos((omega1 + omega2 + omega3)*t) - 4*cos((omega1 + omega2 - omega3)*t) - 4*cos((omega1 - omega2 + omega3)*t) - 4*cos((omega1 - omega2 - omega3)*t)))
+((-1*cos(omega3 * t) + 2*cos(omega2*t + 0.5*PI) + 2*cos(omega1 * t + 0.5*PI) + 4*cos((omega1 + omega2)*t) - 4*cos((omega1 - omega2)*t) + 2*cos((omega1 + omega3)*t + 0.5*PI) + 2*cos((omega1-omega2)*t) + 2*cos((omega2 + omega3)*t) + 2*cos((omega2 - omega3)*t) - 4*cos((omega1 + omega2 + omega3)*t) - 4*cos((omega1 + omega2 - omega3)*t) - 4*cos((omega1 - omega2 + omega3)*t) - 4*cos((omega1 - omega2 - omega3)*t)))
+
 def H1_rot1(t,*args):
+<<<<<<< HEAD
 	return (-0.25*cos(omega1 * t + 0.5*PI) )*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
 def H1_rot1d(t,*args):
 	return (-0.25*cos(omega1 * t + 0.5*PI) )*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )
@@ -63,7 +69,6 @@ def H1_rot_123_mmp(t,*args):
 	return ( 0.25*cos((-omega1 - omega2 + omega3)*t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot_123_mmm(t,*args):
 	return ( 0.25*cos((-omega1 - omega2 - omega3)*t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
-
 
 
 R = 1/sqrt(2) * (sigmay() + sigmaz())
