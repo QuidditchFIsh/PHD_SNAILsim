@@ -46,9 +46,12 @@ H = [H0,
 [mult13_23 * cos(0.5) * q2*q3,H1_rot23_pp],[mult13_23 * cos(0.5) * q2*q3.dag(),H1_rot23_pm],[mult13_23 * cos(0.5) * q2.dag()*q3,H1_rot23_mp],[mult13_23 * cos(0.5) * q2.dag()*q3.dag(),H1_rot23_mm],
 [mult123 * cos(0.5) * q1*q2*q3,H1_rot_123_ppp],[mult123 * cos(0.5) * q1*q2*q3.dag(),H1_rot_123_ppm],[mult123 * cos(0.5) * q1*q2.dag()*q3,H1_rot_123_pmp],[mult123 * cos(0.5) * q1*q2.dag()*q3.dag(),H1_rot_123_pmm],
 [mult123 * cos(0.5) * q1.dag()*q2*q3,H1_rot_123_mpp],[mult123 * cos(0.5) * q1.dag()*q2*q3.dag(),H1_rot_123_mpm],[mult123 * cos(0.5) * q1.dag()*q2.dag()*q3,H1_rot_123_mmp],[mult123 * cos(0.5) * q1.dag()*q2.dag()*q3.dag(),H1_rot_123_mmm],
+#Terms for the pi_i * pi_s- 
+[0.25 * sM * q1,H1_rot_sMq1],[-0.25 * sM * q1.dag(),H1_rot_sMq1d],[-0.25 * sM.dag() * q1,H1_rot_sMdq1],[0.25 * sM.dag() * q1.dag(),H1_rot_sMdq1d],[0.25 * sM * q2,H1_rot_sMq2],[-0.25 * sM * q2.dag(),H1_rot_sMq2d],
+[-0.25 * sM.dag() * q2,H1_rot_sMdq2],[0.25 * sM.dag() * q2.dag(),H1_rot_sMdq2d],[0.25 * sM * q3,H1_rot_sMq3],[-0.25 * sM * q3.dag(),H1_rot_sMq3d],[-0.25 * sM.dag() * q3,H1_rot_sMdq3],[0.25 * sM.dag() * q3.dag(),H1_rot_sMdq3d]
 ]
 
-tlist = np.linspace(0,2**7,2**7)
+tlist = np.linspace(0,100,100)
 
 c_ops = [0.001*q1,0.001*q2,0.001*q3,0.001*sM,0.001*sP,0.002*sz1,0.002*sz2,0.002*sz3]
 
@@ -58,15 +61,15 @@ outputstr = ''
 for i in range(0,3):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero,zero)
-		outputstr = 'Output/Toffoli_23-04-19/one/'
+		outputstr = 'Output/Toffoli_25-04-19/one/'
 		print('1')
 	if i == 1:	
 		psi0 = tensor(one,one,zero,zero,zero);Tdm = tensor(one,one,one,zero,zero)
-		outputstr = 'Output/Toffoli_23-04-19/two/'
+		outputstr = 'Output/Toffoli_25-04-19/two/'
 		print('2')
 	if i == 2:
 		psi0 = tensor(one,one,one,zero,zero);Tdm = tensor(one,one,zero,zero,zero)
-		outputstr = 'Output/Toffoli_23-04-19/three/'
+		outputstr = 'Output/Toffoli_25-04-19/three/'
 		print('3')
 	'''
 	if i == 3:

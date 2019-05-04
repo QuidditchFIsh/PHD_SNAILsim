@@ -66,9 +66,9 @@ def H1_rot_123_mmm(t,*args):
 	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
 
 
-omega1   = 20
-omega2   = 15
-omega3   = 8
+omega1   = 4
+omega2   = 10
+omega3   = 17
 
 X = jmat(1,'x')
 Y = jmat(1,'y')

@@ -2,9 +2,14 @@ from math import *
 from qutip import *
 PI = 3.14159265359 
 
+omega1   = 4 - 0.02
+omega2   = 10 + 0.376
+omega3   = 17 + 0.112
+'''
 omega1   = 4
 omega2   = 10
 omega3   = 17
+'''
 
 omegaM = 8.45
 omegaP = 35
@@ -16,15 +21,15 @@ zero = R*basis(2,0)
 
 a = R * sigmap() * R
 
-U1 = 1.5
-U2 = 1.5
+U1 = 1.7
+U2 = 1.6
 U3 = 1.5
 #identity 
 
 q1 = tensor(a, qeye(2),qeye(2),qeye(2),qeye(2))
 q2 = tensor(qeye(2),a,qeye(2),qeye(2),qeye(2))
 q3 = tensor(qeye(2),qeye(2),a,qeye(2),qeye(2))
-sM = tensor(qeye(2),qeye(2),qeye(2),sigmap(),qeye(2))
+sM = 0.5*tensor(qeye(2),qeye(2),qeye(2),sigmap(),qeye(2))
 sP = tensor(qeye(2),qeye(2),qeye(2),qeye(2),sigmap())
 
 sx1 = tensor(sigmax(),qeye(2),qeye(2),qeye(2),qeye(2))
