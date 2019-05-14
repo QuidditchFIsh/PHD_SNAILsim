@@ -7,61 +7,61 @@ import time
 import datetime
 
 def w1(t,*args):
-	return 0.1 * cos(2 * omega1 * t) + (0 + 1j)*sin(2 * omega1 * t)
+	return EJ * cos(2 * omega1 * t) + (0 + 1j)*sin(2 * omega1 * t)
 def w1_d(t,*args):
-	return 0.1 * cos(2 * omega1 * t) - (0 + 1j)*sin(2 * omega1 * t)
+	return EJ * cos(2 * omega1 * t) - (0 + 1j)*sin(2 * omega1 * t)
 def w2(t,*args):
-	return 0.1 * cos(2 * omega2 * t) + (0 + 1j)*sin(2 * omega2 * t)
+	return EJ * cos(2 * omega2 * t) + (0 + 1j)*sin(2 * omega2 * t)
 def w2_d(t,*args):
-	return 0.1 * cos(2 * omega2 * t) - (0 + 1j)*sin(2 * omega2 * t)
+	return EJ * cos(2 * omega2 * t) - (0 + 1j)*sin(2 * omega2 * t)
 def w3(t,*args):
-	return 0.1 * cos(2 * omega3 * t) + (0 + 1j)*sin(2 * omega3 * t)
+	return EJ * cos(2 * omega3 * t) + (0 + 1j)*sin(2 * omega3 * t)
 def w3_d(t,*args):
-	return 0.1 * cos(2 * omega3 * t) - (0 + 1j)*sin(2 * omega3 * t)
+	return EJ * cos(2 * omega3 * t) - (0 + 1j)*sin(2 * omega3 * t)
 
 def w2_w3(t,*args):
-	return 0.1 * cos(2 * (omega2 + omega3) * t) + (0 + 1j)*sin(2 * (omega2 + omega3) * t)
+	return EJ * cos(2 * (omega2 + omega3) * t) + (0 + 1j)*sin(2 * (omega2 + omega3) * t)
 def w2_w3_d(t,*args):
-	return 0.1 * cos(2 * (omega2 + omega3) * t) - (0 + 1j)*sin(2 * (omega2 + omega3) * t)
+	return EJ * cos(2 * (omega2 + omega3) * t) - (0 + 1j)*sin(2 * (omega2 + omega3) * t)
 def w2_w3m(t,*args):
-	return 0.1 * cos(2 * (omega2 - omega3) * t) + (0 + 1j)*sin(2 * (omega2 - omega3) * t)
+	return EJ * cos(2 * (omega2 - omega3) * t) + (0 + 1j)*sin(2 * (omega2 - omega3) * t)
 def w2_w3m_d(t,*args):
-	return 0.1 * cos(2 * (omega2 - omega3) * t) - (0 + 1j)*sin(2 * (omega2 - omega3) * t)
+	return EJ * cos(2 * (omega2 - omega3) * t) - (0 + 1j)*sin(2 * (omega2 - omega3) * t)
 
 def w1_w3(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega3) * t) + (0 + 1j)*sin(2 * (omega1 + omega3) * t)
+	return EJ * cos(2 * (omega1 + omega3) * t) + (0 + 1j)*sin(2 * (omega1 + omega3) * t)
 def w1_w3_d(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega3) * t) - (0 + 1j)*sin(2 * (omega1 + omega3) * t)
+	return EJ * cos(2 * (omega1 + omega3) * t) - (0 + 1j)*sin(2 * (omega1 + omega3) * t)
 def w1_w3m(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega3) * t) + (0 + 1j)*sin(2 * (omega1 - omega3) * t)
+	return EJ * cos(2 * (omega1 - omega3) * t) + (0 + 1j)*sin(2 * (omega1 - omega3) * t)
 def w1_w3m_d(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega3) * t) - (0 + 1j)*sin(2 * (omega1 - omega3) * t)
+	return EJ * cos(2 * (omega1 - omega3) * t) - (0 + 1j)*sin(2 * (omega1 - omega3) * t)
 
 def w1_w2(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega2) * t) + (0 + 1j)*sin(2 * (omega1 + omega2) * t)
+	return EJ * cos(2 * (omega1 + omega2) * t) + (0 + 1j)*sin(2 * (omega1 + omega2) * t)
 def w1_w2_d(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega2) * t) - (0 + 1j)*sin(2 * (omega1 + omega2) * t)
+	return EJ * cos(2 * (omega1 + omega2) * t) - (0 + 1j)*sin(2 * (omega1 + omega2) * t)
 def w1_w2m(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega2) * t) + (0 + 1j)*sin(2 * (omega1 - omega2) * t)
+	return EJ * cos(2 * (omega1 - omega2) * t) + (0 + 1j)*sin(2 * (omega1 - omega2) * t)
 def w1_w2m_d(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega2) * t) - (0 + 1j)*sin(2 * (omega1 - omega2) * t)
+	return EJ * cos(2 * (omega1 - omega2) * t) - (0 + 1j)*sin(2 * (omega1 - omega2) * t)
 
 def w1_w2_w3(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega2 + omega3) * t) + (0 + 1j)*sin(2 * (omega1 + omega2 + omega3) * t)
+	return EJ * cos(2 * (omega1 + omega2 + omega3) * t) + (0 + 1j)*sin(2 * (omega1 + omega2 + omega3) * t)
 def w1_w2_w3_d(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega2 + omega3) * t) - (0 + 1j)*sin(2 * (omega1 + omega2 + omega3) * t)
+	return EJ * cos(2 * (omega1 + omega2 + omega3) * t) - (0 + 1j)*sin(2 * (omega1 + omega2 + omega3) * t)
 def w1_w2_w3m(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega2 - omega3) * t) + (0 + 1j)*sin(2 * (omega1 + omega2 - omega3) * t)
+	return EJ * cos(2 * (omega1 + omega2 - omega3) * t) + (0 + 1j)*sin(2 * (omega1 + omega2 - omega3) * t)
 def w1_w2_w3m_d(t,*args):
-	return 0.1 * cos(2 * (omega1 + omega2 - omega3) * t) - (0 + 1j)*sin(2 * (omega1 + omega2 - omega3) * t)
+	return EJ * cos(2 * (omega1 + omega2 - omega3) * t) - (0 + 1j)*sin(2 * (omega1 + omega2 - omega3) * t)
 def w1_w2m_w3(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega2 + omega3) * t) + (0 + 1j)*sin(2 * (omega1 - omega2 + omega3) * t)
+	return EJ * cos(2 * (omega1 - omega2 + omega3) * t) + (0 + 1j)*sin(2 * (omega1 - omega2 + omega3) * t)
 def w1_w2m_w3_d(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega2 + omega3) * t) - (0 + 1j)*sin(2 * (omega1 - omega2 + omega3) * t)
+	return EJ * cos(2 * (omega1 - omega2 + omega3) * t) - (0 + 1j)*sin(2 * (omega1 - omega2 + omega3) * t)
 def w1_w2m_w3m(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega2 - omega3) * t) + (0 + 1j)*sin(2 * (omega1 - omega2 - omega3) * t)
+	return EJ * cos(2 * (omega1 - omega2 - omega3) * t) + (0 + 1j)*sin(2 * (omega1 - omega2 - omega3) * t)
 def w1_w2m_w3m_d(t,*args):
-	return 0.1 * cos(2 * (omega1 - omega2 - omega3) * t) - (0 + 1j)*sin(2 * (omega1 - omega2 - omega3) * t)
+	return EJ * cos(2 * (omega1 - omega2 - omega3) * t) - (0 + 1j)*sin(2 * (omega1 - omega2 - omega3) * t)
 
 
 
@@ -108,7 +108,7 @@ s3x = (q3 + q3.dag())
 
 
 
-tlist = np.linspace(0,10,num=500)
+tlist = np.linspace(0,1000,num=1000)
 #R = 1/sqrt(2) * (sigmay() + sigmaz())
 R=1
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2))
@@ -125,8 +125,8 @@ sz3 = tensor(qeye(2),qeye(2), R * sigmaz() * R)
 
 #print(s1y)
 #print(sz1)
-
-H2 = 0.25*(I + s3x - s2y - s1y - s2y*s3x - s1y*s3x + s1y*s2y + s1y*s2y*s3x)
+EJ = 0.001
+H2 = EJ * 0.25*(I + s3x - s2y - s1y - s2y*s3x - s1y*s3x + s1y*s2y + s1y*s2y*s3x)
 print(H2)
 #print(H2)
 H = [H2,[-1 * (0+1j)*q1,w1],[(0+1j)*q1,w1_d],[-1 * (0+1j)*q2,w2],[(0+1j)*q2,w2_d],[q3,w3],[q3,w3_d],
@@ -166,7 +166,7 @@ H = [H2,[-1 * (0+1j)*q1,w1],[(0+1j)*q1,w1_d],[-1 * (0+1j)*q2,w2],[(0+1j)*q2,w2_d
 
 
 
-c_ops = [0.01*q1,0.01*q2,0.01*q3,0.02*sz1,0.02*sz2,0.02*sz3]
+c_ops = [0.00005*q1,0.00005*q2,0.00005*q3,0.0001*sz1,0.0001*sz2,0.0001*sz3]
 #c_ops = []
 outputstr = ''
 
@@ -184,26 +184,26 @@ for j in freqs:
 		if i == 0:
 			psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
 			Tdm = ket2dm(Tdm)
-			outputstr_fid 	= 'Output/test1/fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp1 	= 'Output/test1/occupation_q1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp2 	= 'Output/test1/occupation_q2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp3 	= 'Output/test1/occupation_q3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz1 	= 'Output/test1/sz1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz2 	= 'Output/test1/sz2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz3 	= 'Output/test1/sz3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_fid 	= 'Output/Toffoli_RWA_14-05-19/fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp1 	= 'Output/Toffoli_RWA_14-05-19/occupation_q1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp2 	= 'Output/Toffoli_RWA_14-05-19/occupation_q2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp3 	= 'Output/Toffoli_RWA_14-05-19/occupation_q3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz1 	= 'Output/Toffoli_RWA_14-05-19/sz1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz2 	= 'Output/Toffoli_RWA_14-05-19/sz2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz3 	= 'Output/Toffoli_RWA_14-05-19/sz3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 			print('000')
 			print(str(omega1) + " " + str(omega2) + " " + str(omega3))
 			result = mesolve(H,psi0,tlist,c_ops,[sz1,sz2,sz3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 		if i == 1:
 			psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
 			Tdm = ket2dm(Tdm)
-			outputstr_fid 	= 'Output/test1/fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp1 	= 'Output/test1/occupation_q1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp2 	= 'Output/test1/occupation_q2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp3 	= 'Output/test1/occupation_q3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz1 	= 'Output/test1/sz1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz2 	= 'Output/test1/sz2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz3 	= 'Output/test1/sz3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_fid 	= 'Output/Toffoli_RWA_14-05-19/fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp1 	= 'Output/Toffoli_RWA_14-05-19/occupation_q1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp2 	= 'Output/Toffoli_RWA_14-05-19/occupation_q2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp3 	= 'Output/Toffoli_RWA_14-05-19/occupation_q3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz1 	= 'Output/Toffoli_RWA_14-05-19/sz1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz2 	= 'Output/Toffoli_RWA_14-05-19/sz2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz3 	= 'Output/Toffoli_RWA_14-05-19/sz3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 			print('111')
 			print(str(omega1) + " " + str(omega2) + " " + str(omega3))
 			result = mesolve(H,psi0,tlist,c_ops,[sz1,sz2,sz3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))

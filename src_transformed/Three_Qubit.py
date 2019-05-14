@@ -8,10 +8,10 @@ import datetime
 
 
 
-#((cos(omega3 * t) + 2*sin(omega2*t) + 2*sin(omega1 * t) - 2*cos((omega1 + omega2)*t) + 2*cos((omega1 - omega2)*t) + sin((omega1 + omega3)*t) + sin((omega1-omega3)*t) + sin((omega2 + omega3)*t) + sin((omega2 - omega3)*t) - cos((omega1 + omega2 + omega3)*t) - cos((omega1 + omega2 - omega3)*t) + cos((omega1 - omega2 + omega3)*t) + cos((omega1 - omega2 - omega3)*t)))
-#((-1*cos(omega3 * t) + 2*cos(omega2*t + 0.5*PI) + 2*cos(omega1 * t + 0.5*PI) + 4*cos((omega1 + omega2)*t) - 4*cos((omega1 - omega2)*t) + 2*cos((omega1 + omega3)*t + 0.5*PI) + 2*cos((omega1-omega2)*t) + 2*cos((omega2 + omega3)*t) + 2*cos((omega2 - omega3)*t) - 4*cos((omega1 + omega2 + omega3)*t) - 4*cos((omega1 + omega2 - omega3)*t) - 4*cos((omega1 - omega2 + omega3)*t) - 4*cos((omega1 - omega2 - omega3)*t)))
-# ((cos(omega3 * t) + 2*sin(omega2*t) + 2*sin(omega1 * t) - 2*cos((omega1 + omega2)*t) + 2*cos((omega1 - omega2)*t) + sin((omega1 + omega3)*t) + sin((omega1-omega3)*t) + sin((omega2 + omega3)*t) + sin((omega2 - omega3)*t) - cos((omega1 + omega2 + omega3)*t) - cos((omega1 + omega2 - omega3)*t) + cos((omega1 - omega2 + omega3)*t) + cos((omega1 - omega2 - omega3)*t)))
-#(1 + sin(omega1*t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))
+#((cos(omega3 * t) + 2*sin(omega2*t) + 2*sin(omega1 * t) - 2*cos((omega1 + omega2)*t) + 2*cos((omega1 - omega2)*t) + sin((omega1 + omega3)*t) + sin((omega1-omega3)*t) + sin((omega2 + omega3)*t) + sin((omega2 - omega3)*t) - cos((omega1 + omega2 + omega3)*t) - cos((omega1 + omega2 - omega3)*t) + cos((omega1 - omega2 + omega3)*t) + cos((omega1 - omega2 - omega3)*t))) *
+#((-1*cos(omega3 * t) + 2*cos(omega2*t + 0.5*PI) + 2*cos(omega1 * t + 0.5*PI) + 4*cos((omega1 + omega2)*t) - 4*cos((omega1 - omega2)*t) + 2*cos((omega1 + omega3)*t + 0.5*PI) + 2*cos((omega1-omega2)*t) + 2*cos((omega2 + omega3)*t) + 2*cos((omega2 - omega3)*t) - 4*cos((omega1 + omega2 + omega3)*t) - 4*cos((omega1 + omega2 - omega3)*t) - 4*cos((omega1 - omega2 + omega3)*t) - 4*cos((omega1 - omega2 - omega3)*t))) *
+# ((cos(omega3 * t) + 2*sin(omega2*t) + 2*sin(omega1 * t) - 2*cos((omega1 + omega2)*t) + 2*cos((omega1 - omega2)*t) + sin((omega1 + omega3)*t) + sin((omega1-omega3)*t) + sin((omega2 + omega3)*t) + sin((omega2 - omega3)*t) - cos((omega1 + omega2 + omega3)*t) - cos((omega1 + omega2 - omega3)*t) + cos((omega1 - omega2 + omega3)*t) + cos((omega1 - omega2 - omega3)*t))) *
+#(1 + sin(omega1*t))
 
 def H1_rot1(t,*args):
 	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
@@ -71,6 +71,8 @@ def H1_rot_123_mmp(t,*args):
 def H1_rot_123_mmm(t,*args):
 	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 
+#(1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))
+#(1 + 2*sin(omega1 * t) + 2*sin(omega2 * t) + cos(omega3 * t) + 4 * sin(omega1 * t)*cos(omega3 * t) + 4 * sin(omega2 * t)*cos(omega3 * t) + 2 * sin(omega1 * t)*sin(omega2 * t) + 4 *sin(omega1 * t)*sin(omega2 * t)*cos(omega3 * t))
 
 R = 1/sqrt(2) * (sigmay() + sigmaz())
 #R=1
@@ -122,7 +124,7 @@ s3x = (q3 + q3.dag())
 
 
 
-tlist = np.linspace(0,2000,2000)
+tlist = np.linspace(0,1000,2000)
 #R = 1/sqrt(2) * (sigmay() + sigmaz())
 R=1
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2))
@@ -144,7 +146,7 @@ H2 = 0.0015*(I + s3x - s2y - s1y - s2y*s3x - s1y*s3x + s1y*s2y + s1y*s2y*s3x)
 #print(H2)
 
 
-c_ops = [0.05*q1,0.05*q2,0.05*q3,0.05*sz1,0.05*sz2,0.05*sz3]
+c_ops = [0.005*q1,0.005*q2,0.005*q3,0.01*sz1,0.01*sz2,0.01*sz3]
 
 outputstr = ''
 
@@ -158,9 +160,9 @@ for j in freqs:
 	f1 = j[0]
 	f2 = j[1]
 	f3 = j[2]
-	for k in range(0,2):
+	for k in range(0,1):
 		decay = 0.05 * (k + 1)
-		c_ops = [decay*q1,decay*q2,decay*q3,decay*sz1,decay*sz2,decay*sz3]
+		c_ops = [decay*q1,decay*q2,decay*q3,2*decay*sz1,2*decay*sz2,2*decay*sz3]
 
 		for i in range(0,2):
 			if i == 0:
@@ -211,11 +213,12 @@ for j in freqs:
 			occupation1 = []
 			occupation2 = []
 			occupation3 = []
+			fidelity_dat = []
 
 			
 			for j in range(0,len(tlist)):
 				#min_fidelity_dat.append(min(fidelity000[j],fidelity111[j]))
-			 	#fidelity_dat.append(fidelity(result.states[j],Tdm))
+			 	fidelity_dat.append(fidelity(result.states[j],Tdm))
 			 	occupation1.append(expect(sigmap().dag() * sigmap(),result.states[j].ptrace(0)).real)
 			 	occupation2.append(expect(sigmap().dag() * sigmap(),result.states[j].ptrace(1)).real)
 			 	occupation3.append(expect(sigmap().dag() * sigmap(),result.states[j].ptrace(2)).real)
@@ -229,8 +232,13 @@ for j in freqs:
 			with open(outputstr_occupation_3 , 'w') as f:
 				for j in occupation3:
 					f.write(str(j) + "\n")
+			with open(outputstr_fidelity , 'w') as f:
+				for j in fidelity_dat:
+					f.write(str(j) + "\n")
+					
 		for j in range(0,len(tlist)):
 				min_fidelity_dat.append(min(fidelity000[j],fidelity111[j]))
-		with open('Output/Toffoli_14-05-19/Min_Fidelity.dat','a+') as f:
+		with open('Output/Toffoli_14-05-19/Min_Fidelity_1.dat','w') as f:
 			for j in range(0,len(tlist)):
-				f.write(str(j) + " " + str(decay)+ " " + str(min_fidelity_dat[j]) + "\n")
+				f.write(str(decay) + " " + str(j)+ " " + str(min_fidelity_dat[j]) + "\n")
+			f.write("\n")
