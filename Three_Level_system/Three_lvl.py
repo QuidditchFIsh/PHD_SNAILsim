@@ -8,62 +8,62 @@ import os
 from Constants import *
 
 def H1_rot1(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )
 def H1_rot1d(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )
 def H1_rot2(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )
 def H1_rot2d(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega2 * t) - (0+1j)*sin(omega2*t))
 def H1_rot3(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega3 * t) + (0+1j)*sin(omega3*t))
 def H1_rot3d(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega3 * t) - (0+1j)*sin(omega3*t))
 
 def H1_rot12_pp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )
 def H1_rot12_pm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )
 def H1_rot12_mp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )
 def H1_rot12_mm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )
 
 def H1_rot13_pp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot13_pm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 def H1_rot13_mp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot13_mm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 
 def H1_rot23_pp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot23_pm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 def H1_rot23_mp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot23_mm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t)))
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t))*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 
 
 def H1_rot_123_ppp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot_123_ppm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 def H1_rot_123_pmp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot_123_pmm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) + (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 def H1_rot_123_mpp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot_123_mpm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) + (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 def H1_rot_123_mmp(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) + (0+1j)*sin(omega3*t) )
 def H1_rot_123_mmm(t,*args):
-	return (0.25*(-1*cos(omega3 * t) + cos(omega2*t + 0.5*PI) + cos(omega1 * t + 0.5*PI) + cos(omega2 * t + 0.5*PI)*cos(omega3 * t) + cos(omega1*t + 0.5*PI)*cos(omega3 * t) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI) - cos(omega1*t + 0.5*PI)*cos(omega2*t + 0.5*PI)*cos(omega3*t))) 
+	return (1 + sin(omega1 * t)) * (1 + sin(omega2 * t)) * (1 + cos(omega3 * t)) * (cos(omega1 * t) - (0+1j)*sin(omega1*t) )*(cos(omega2 * t) - (0+1j)*sin(omega2*t) )*(cos(omega3 * t) - (0+1j)*sin(omega3*t) )
 
 
 omega1   = 4
@@ -75,25 +75,25 @@ Y = jmat(1,'y')
 Z = jmat(1,'z')
 
 #R = 1/sqrt(2) * (Y + Z)
-#R = 1/sqrt(2) * Qobj([[1+0j,0-1j,0],[0+1j,-1+0j,0],[0,0,1]])
+R = 1/sqrt(2) * Qobj([[1+0j,0-1j,0],[0+1j,-1+0j,0],[0,0,1]])
 
-R=1
+#R=1
 
-one  = R * basis(3,1)
-zero = R * basis(3,0)
-two  = R * basis(3,2)
+one  =  basis(3,1)
+zero =  basis(3,0)
+two  =  basis(3,2)
 
 a = R * destroy(3) * R
 
-q1 = 0.5*tensor(a, qeye(3),qeye(3))
-q2 = 0.5*tensor(qeye(3),a,qeye(3))
-q3 = 0.5*tensor(qeye(3),qeye(3),a)
+q1 = tensor(a, qeye(3),qeye(3))
+q2 = tensor(qeye(3),a,qeye(3))
+q3 = tensor(qeye(3),qeye(3),a)
 
 #H0  = 0 * tensor(a,a,a)
 H0 = omega1 * q1.dag()*q1 + omega2 * q2.dag()*q2 + omega3 * q3.dag()*q3 + U1 * q1.dag() * q1.dag() * q1 * q1 + U2 * q2.dag() * q2.dag() * q2 * q2 + U3 * q3.dag() * q3.dag() * q3 * q3
 
 #Define the multipliers for the system
-EJ = 0.1
+EJ = 0.01
 
 mult1_2 	= EJ * 0.5	 
 mult3  		= EJ * 1.0
@@ -113,7 +113,7 @@ H = [H0,
 [mult123 *  q1*q2*q3,H1_rot_123_ppp],[mult123 *  q1*q2*q3.dag(),H1_rot_123_ppm],[mult123 *  q1*q2.dag()*q3,H1_rot_123_pmp],[mult123 *  q1*q2.dag()*q3.dag(),H1_rot_123_pmm],
 [mult123 *  q1.dag()*q2*q3,H1_rot_123_mpp],[mult123 *  q1.dag()*q2*q3.dag(),H1_rot_123_mpm],[mult123 *  q1.dag()*q2.dag()*q3,H1_rot_123_mmp],[mult123 *  q1.dag()*q2.dag()*q3.dag(),H1_rot_123_mmm]]
 
-tlist = np.linspace(0,2000,2**10)
+tlist = np.linspace(0,600,2**10)
 
 R=1
 sx1 = tensor(R * X * R,qeye(3),qeye(3))
@@ -128,7 +128,7 @@ sz1 = tensor(R * Z * R,qeye(3),qeye(3))
 sz2 = tensor(qeye(3), R * Z * R,qeye(3))
 sz3 = tensor(qeye(3),qeye(3), R * Z * R)
 
-c_ops = [0.001*q1,0.001*q2,0.001*q3,0.002*sz1,0.002*sz2,0.002*sz3]
+c_ops = [0.01*q1,0.01*q2,0.01*q3,0.02*sz1,0.02*sz2,0.02*sz3]
 
 outputstr = ''
 
@@ -136,13 +136,13 @@ outputstr = ''
 for i in range(0,1):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
-		outputstr = 'Output/Toffoli_23-04-19/'
+		outputstr = 'Output/Toffoli_09-05-19/'
 	if i == 1:	
 		psi0 = tensor(one,one,zero);Tdm = tensor(one,one,one)
-		outputstr = 'Output/Toffoli_23-04-19/'
+		outputstr = 'Output/Toffoli_09-05-19/'
 	if i == 2:
 		psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
-		outputstr = 'Output/Toffoli_23-04-19/'
+		outputstr = 'Output/Toffoli_09-05-19/'
 	'''
 	if i == 3:
 		psi0 = tensor(zero,one,one);Tdm = tensor(zero,one,one)

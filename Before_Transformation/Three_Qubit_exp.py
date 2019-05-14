@@ -61,15 +61,15 @@ outputstr = ''
 for i in range(0,3):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero,zero)
-		outputstr = 'Output/Toffoli_25-04-19/one/'
+		outputstr = 'Output/Toffoli_09-05-19/one/'
 		print('1')
 	if i == 1:	
 		psi0 = tensor(one,one,zero,zero,zero);Tdm = tensor(one,one,one,zero,zero)
-		outputstr = 'Output/Toffoli_25-04-19/two/'
+		outputstr = 'Output/Toffoli_09-05-19/two/'
 		print('2')
 	if i == 2:
 		psi0 = tensor(one,one,one,zero,zero);Tdm = tensor(one,one,zero,zero,zero)
-		outputstr = 'Output/Toffoli_25-04-19/three/'
+		outputstr = 'Output/Toffoli_09-05-19/three/'
 		print('3')
 	'''
 	if i == 3:
