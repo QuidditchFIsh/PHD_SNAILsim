@@ -91,15 +91,15 @@ H0  = 0 * tensor(a,a,a)
 I = tensor(qeye(2),qeye(2),qeye(2))
 
 #Define the multipliers for the system
-EJ = 0.1
+EJ = 0.01
 
-mult1_2 	= EJ * 0.5 	 
-mult3  		= EJ * 1.0
+mult1_2 	= EJ
+mult3  		= EJ 
 
-mult12 		= EJ * 0.5
-mult13_23	= EJ * 0.25 
+mult12 		= EJ 
+mult13_23	= EJ 
 
-mult123	 	= EJ * 0.25 
+mult123	 	= EJ
 
 H = [H0,
 [mult1_2 *  q1,H1_rot1],[mult1_2 *  q1.dag(),H1_rot1d],[mult1_2 *  q2,H1_rot2],[mult1_2 *  q2.dag(),H1_rot2d],[mult3 *  q3,H1_rot3],[mult3 *  q3.dag(),H1_rot3d],
@@ -146,7 +146,7 @@ H2 = 0.0015*(I + s3x - s2y - s1y - s2y*s3x - s1y*s3x + s1y*s2y + s1y*s2y*s3x)
 #print(H2)
 
 
-c_ops = [0.005*q1,0.005*q2,0.005*q3,0.01*sz1,0.01*sz2,0.01*sz3]
+c_ops = [0.0005*q1,0.0005*q2,0.0005*q3,0.0001*sz1,0.0001*sz2,0.0001*sz3]
 
 outputstr = ''
 
@@ -161,16 +161,16 @@ for j in freqs:
 	f2 = j[1]
 	f3 = j[2]
 	for k in range(0,1):
-		decay = 0.05 * (k + 1)
+		decay = 0.00005 * (k + 1)
 		c_ops = [decay*q1,decay*q2,decay*q3,2*decay*sz1,2*decay*sz2,2*decay*sz3]
 
 		for i in range(0,2):
 			if i == 0:
 				psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
-				outputstr_fidelity = 'Output/Toffoli_14-05-19/fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_1 = 'Output/Toffoli_14-05-19/occupation000_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_2 = 'Output/Toffoli_14-05-19/occupation000_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_3 = 'Output/Toffoli_14-05-19/occupation000_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_fidelity = 'Output/Toffoli_26-06-19/fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_1 = 'Output/Toffoli_26-06-19/occupation000_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_2 = 'Output/Toffoli_26-06-19/occupation000_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_3 = 'Output/Toffoli_26-06-19/occupation000_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 				print('000 ' + str(decay))
 				print(str(omega1) + " " + str(omega2) + " " + str(omega3))
 				result = mesolve(H,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
@@ -179,10 +179,10 @@ for j in freqs:
 			 		fidelity000.append(fidelity(result.states[j],Tdm))
 			if i == 1:
 				psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
-				outputstr_fidelity = 'Output/Toffoli_14-05-19/fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_1 = 'Output/Toffoli_14-05-19/occupation111_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_2 = 'Output/Toffoli_14-05-19/occupation111_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_3 = 'Output/Toffoli_14-05-19/occupation111_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_fidelity = 'Output/Toffoli_26-06-19/fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_1 = 'Output/Toffoli_26-06-19/occupation111_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_2 = 'Output/Toffoli_26-06-19/occupation111_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_3 = 'Output/Toffoli_26-06-19/occupation111_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 				print('111 ' + str(decay))
 				print(str(omega1) + " " + str(omega2) + " " + str(omega3))
 				result = mesolve(H,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
@@ -191,19 +191,19 @@ for j in freqs:
 			 		fidelity111.append(fidelity(result.states[j],Tdm))
 			if i == 2:
 				psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
-				outputstr_fidelity = 'Output/Toffoli_14-05-19/Fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_1 = 'Output/Toffoli_14-05-19/Occupation000_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_2 = 'Output/Toffoli_14-05-19/Occupation000_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_3 = 'Output/Toffoli_14-05-19/Occupation000_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_fidelity = 'Output/Toffoli_26-06-19/Fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_1 = 'Output/Toffoli_26-06-19/Occupation000_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_2 = 'Output/Toffoli_26-06-19/Occupation000_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_3 = 'Output/Toffoli_26-06-19/Occupation000_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 				print('000')
 				print(str(omega1) + " " + str(omega2) + " " + str(omega3))
 				result = mesolve(H2,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 			if i == 3:
 				psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
-				outputstr_fidelity = 'Output/Toffoli_14-05-19/Fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_1 = 'Output/Toffoli_14-05-19/Occupation111_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_2 = 'Output/Toffoli_14-05-19/Occupation111_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-				outputstr_occupation_3 = 'Output/Toffoli_14-05-19/Occupation111_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_fidelity = 'Output/Toffoli_26-06-19/Fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_1 = 'Output/Toffoli_26-06-19/Occupation111_q1-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_2 = 'Output/Toffoli_26-06-19/Occupation111_q2-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+				outputstr_occupation_3 = 'Output/Toffoli_26-06-19/Occupation111_q3-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 				print('111')
 				print(str(omega1) + " " + str(omega2) + " " + str(omega3))
 				result = mesolve(H2,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
@@ -238,7 +238,7 @@ for j in freqs:
 					
 		for j in range(0,len(tlist)):
 				min_fidelity_dat.append(min(fidelity000[j],fidelity111[j]))
-		with open('Output/Toffoli_14-05-19/Min_Fidelity_1.dat','w') as f:
+		with open('Output/Toffoli_26-06-19/Min_Fidelity_1.dat','w') as f:
 			for j in range(0,len(tlist)):
 				f.write(str(decay) + " " + str(j)+ " " + str(min_fidelity_dat[j]) + "\n")
 			f.write("\n")

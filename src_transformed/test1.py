@@ -1,8 +1,6 @@
 from math import *
 
-omega1 = 5
-for i in range(0,100):
-	i1 = i * 0.1
-	print(cos(omega1 * i1 + 1.57) * (cos(omega1*i1) + (0+1j)*sin(omega1*i1)))
-	print((0.5*1j)*(((cos(omega1*i1) + (0+1j)*sin(omega1*i1))) - ((cos(omega1*i1) - (0+1j)*sin(omega1*i1))))*(cos(omega1*i1) + (0+1j)*sin(omega1*i1)))
-	print("===================================")
+omega1 = 5;omega2=5;omega3=5
+
+for t in range(0,10):
+	print((cos((omega1 - omega2 + omega3) * t) + (0 + 1j)*sin((omega1 - omega2 + omega3) * t)) * (cos((omega1 - omega2 + omega3) * t) - (0 + 1j)*sin((omega1 - omega2 + omega3) * t)))
