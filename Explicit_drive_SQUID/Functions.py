@@ -120,5 +120,32 @@ def Q1d_Q2_Q3d(t,*args):
 def Q1d_Q2_Q3(t,*args):
 	return EJ * c_exp_d(omega1 - omega2 - omega3,t) * drive(t)
 
+def SM_Q1(t,*args):
+	return c_exp(omegaM + omega1,t) * 0.1
+def SM_Q1d(t,*args):
+	return c_exp(omegaM - omega1,t) * 0.1
+def SMd_Q1(t,*args):
+	return c_exp_d(omegaM - omega1,t) * 0.1
+def SMd_Q1d(t,*args):
+	return c_exp_d(omegaM + omega1,t) * 0.1
+
+def SM_Q2(t,*args):
+	return c_exp(omegaM + omega2,t) * 0.1
+def SM_Q2d(t,*args):
+	return c_exp(omegaM - omega2,t) * 0.1
+def SMd_Q2(t,*args):
+	return c_exp_d(omegaM - omega2,t) * 0.1
+def SMd_Q2d(t,*args):
+	return c_exp_d(omegaM + omega2,t) * 0.1
+
+def SM_Q3(t,*args):
+	return c_exp(omegaM + omega3,t) * 0.1
+def SM_Q3d(t,*args):
+	return c_exp(omegaM - omega3,t) * 0.1
+def SMd_Q3(t,*args):
+	return c_exp_d(omegaM - omega3,t) * 0.1
+def SMd_Q3d(t,*args):
+	return c_exp_d(omegaM + omega3,t) * 0.1
+
 
 
