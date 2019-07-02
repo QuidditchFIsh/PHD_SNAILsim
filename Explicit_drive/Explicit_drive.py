@@ -10,8 +10,9 @@ from Constants import *
 
 R = 1/sqrt(2) * (sigmay() + sigmaz())
 #R=1
-one  = basis(2,1)
-zero = basis(2,0)
+
+one  = R * basis(2,1)
+zero = R * basis(2,0)
 
 a = R * sigmap() * R
 
@@ -42,9 +43,9 @@ s3x = (q3 + q3.dag())
 
 
 
-tlist = np.linspace(0,500,num=1000)
+tlist = np.linspace(0,10,num=1000)
 #R = 1/sqrt(2) * (sigmay() + sigmaz())
-R=1
+#R=1
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2))
 sx2 = tensor(qeye(2), R * sigmax() * R,qeye(2))
 sx3 = tensor(qeye(2),qeye(2), R * sigmax() * R)
@@ -58,7 +59,7 @@ sz2 = tensor(qeye(2), R * sigmaz() * R,qeye(2))
 sz3 = tensor(qeye(2),qeye(2), R * sigmaz() * R)
 
 #H2 = EJ *(I - s3x - s2y - s1y - s2y*s3x - s1y*s3x + s1y*s2y + s1y*s2y*s3x)
-H2 = 2*EJ * 0.5 * (0.5*I - 0.5*s3x - 0.5*s2y - s1y - 0.5*0.5*s2y*s3x - 0.5*0.5*s1y*s3x + 0.5*0.25*s1y*s2y + 0.25*0.25*s1y*s2y*s3x)
+H2 = 0.5*(I - sz1)*(I - sz2)*(I - sx3)
 
 #Full Hamiltonian
 H = [[0.5 * 0.5 * q1,Q1],[0.5 * 0.5 * q1.dag(),Q1_d],[0.5 * 0.5 * q2,Q2],[0.5 * 0.5 * q2.dag(),Q2_d],[0.5 * q3,Q3],[0.5 * q3.dag(),Q3_d],
@@ -66,9 +67,7 @@ H = [[0.5 * 0.5 * q1,Q1],[0.5 * 0.5 * q1.dag(),Q1_d],[0.5 * 0.5 * q2,Q2],[0.5 * 
 [0.25 * 0.5 * q1*q3,Q1_Q3],[0.25 * 0.5 * q1*q3.dag(),Q1_Q3d],[0.25 * 0.5 * q1.dag()*q3,Q1d_Q3],[0.25 * 0.5 * q1.dag()*q3.dag(),Q1d_Q3d],
 [0.25 * 0.5 * q2*q3,Q2_Q3],[0.25 * 0.5 * q2*q3.dag(),Q2_Q3d],[0.25 * 0.5 * q2.dag()*q3,Q2d_Q3],[0.25 * 0.5 * q2.dag()*q3.dag(),Q2d_Q3d],
 [0.125 * 0.25 * q1*q2*q3,Q1_Q2_Q3],[0.125 * 0.25 * q1*q2*q3.dag(),Q1_Q2_Q3d],[0.125 * 0.25 * q1*q2.dag()*q3,Q1_Q2d_Q3],[0.125 * 0.25 * q1.dag()*q2*q3,Q1d_Q2_Q3],
-[0.125 * 0.25 * q1*q2.dag()*q3.dag(),Q1_Q2d_Q3d],[0.125 * 0.25 * q1.dag()*q2*q3.dag(),Q1d_Q2_Q3d],[0.125 * 0.25 * q1.dag()*q2.dag()*q3,Q1d_Q2d_Q3],[0.125 * 0.25 * q1.dag()*q2.dag()*q3.dag(),Q1d_Q2d_Q3d],
-
-]
+[0.125 * 0.25 * q1*q2.dag()*q3.dag(),Q1_Q2d_Q3d],[0.125 * 0.25 * q1.dag()*q2*q3.dag(),Q1d_Q2_Q3d],[0.125 * 0.25 * q1.dag()*q2.dag()*q3,Q1d_Q2d_Q3],[0.125 * 0.25 * q1.dag()*q2.dag()*q3.dag(),Q1d_Q2d_Q3d]]
 
 
 #RWA
@@ -96,51 +95,51 @@ for j in freqs:
 		if i == 0:
 			psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
 			Tdm = ket2dm(Tdm)
-			outputstr_fid 	= 'Output/Toffoli_RWA_27-06-19/fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp1 	= 'Output/Toffoli_RWA_27-06-19/occupation_q1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp2 	= 'Output/Toffoli_RWA_27-06-19/occupation_q2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp3 	= 'Output/Toffoli_RWA_27-06-19/occupation_q3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz1 	= 'Output/Toffoli_RWA_27-06-19/sz1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz2 	= 'Output/Toffoli_RWA_27-06-19/sz2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz3 	= 'Output/Toffoli_RWA_27-06-19/sz3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_fid 	= 'Output/Toffoli_RWA_01-07-19/fidelity000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp1 	= 'Output/Toffoli_RWA_01-07-19/occupation_q1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp2 	= 'Output/Toffoli_RWA_01-07-19/occupation_q2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp3 	= 'Output/Toffoli_RWA_01-07-19/occupation_q3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz1 	= 'Output/Toffoli_RWA_01-07-19/sz1_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz2 	= 'Output/Toffoli_RWA_01-07-19/sz2_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz3 	= 'Output/Toffoli_RWA_01-07-19/sz3_000-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 			print('000 Full Drive')
-			result = mesolve(H,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+			result = mesolve(H2,psi0,tlist,c_ops,[sz1],options = Options(store_states = True,store_final_state = True))
 		if i == 1:
 			psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
 			Tdm = ket2dm(Tdm)
-			outputstr_fid 	= 'Output/Toffoli_RWA_27-06-19/fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp1 	= 'Output/Toffoli_RWA_27-06-19/occupation_q1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp2 	= 'Output/Toffoli_RWA_27-06-19/occupation_q2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp3 	= 'Output/Toffoli_RWA_27-06-19/occupation_q3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz1 	= 'Output/Toffoli_RWA_27-06-19/sz1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz2 	= 'Output/Toffoli_RWA_27-06-19/sz2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz3 	= 'Output/Toffoli_RWA_27-06-19/sz3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_fid 	= 'Output/Toffoli_RWA_01-07-19/fidelity111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp1 	= 'Output/Toffoli_RWA_01-07-19/occupation_q1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp2 	= 'Output/Toffoli_RWA_01-07-19/occupation_q2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp3 	= 'Output/Toffoli_RWA_01-07-19/occupation_q3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz1 	= 'Output/Toffoli_RWA_01-07-19/sz1_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz2 	= 'Output/Toffoli_RWA_01-07-19/sz2_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz3 	= 'Output/Toffoli_RWA_01-07-19/sz3_111-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 			print('111 Full Drive')
-			result = mesolve(H,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+			result = mesolve(H2,psi0,tlist,c_ops,options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 		if i == 2:
 			psi0 = tensor(zero,zero,zero);Tdm = tensor(zero,zero,zero)
 			Tdm = ket2dm(Tdm)
-			outputstr_fid 	= 'Output/Toffoli_RWA_27-06-19/fidelity000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp1 	= 'Output/Toffoli_RWA_27-06-19/occupation_q1_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp2 	= 'Output/Toffoli_RWA_27-06-19/occupation_q2_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp3 	= 'Output/Toffoli_RWA_27-06-19/occupation_q3_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz1 	= 'Output/Toffoli_RWA_27-06-19/sz1_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz2 	= 'Output/Toffoli_RWA_27-06-19/sz2_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz3 	= 'Output/Toffoli_RWA_27-06-19/sz3_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_fid 	= 'Output/Toffoli_RWA_01-07-19/fidelity000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp1 	= 'Output/Toffoli_RWA_01-07-19/occupation_q1_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp2 	= 'Output/Toffoli_RWA_01-07-19/occupation_q2_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp3 	= 'Output/Toffoli_RWA_01-07-19/occupation_q3_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz1 	= 'Output/Toffoli_RWA_01-07-19/sz1_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz2 	= 'Output/Toffoli_RWA_01-07-19/sz2_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz3 	= 'Output/Toffoli_RWA_01-07-19/sz3_000-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 			print('000 RWA')
-			result = mesolve(H_RWA,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+			result = mesolve(H_RWA,psi0,tlist,c_ops,options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 		if i == 3:
 			psi0 = tensor(one,one,one);Tdm = tensor(one,one,zero)
 			Tdm = ket2dm(Tdm)
-			outputstr_fid 	= 'Output/Toffoli_RWA_27-06-19/fidelity111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp1 	= 'Output/Toffoli_RWA_27-06-19/occupation_q1_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp2 	= 'Output/Toffoli_RWA_27-06-19/occupation_q2_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_ocp3 	= 'Output/Toffoli_RWA_27-06-19/occupation_q3_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz1 	= 'Output/Toffoli_RWA_27-06-19/sz1_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz2 	= 'Output/Toffoli_RWA_27-06-19/sz2_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
-			outputstr_sz3 	= 'Output/Toffoli_RWA_27-06-19/sz3_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_fid 	= 'Output/Toffoli_RWA_01-07-19/fidelity111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp1 	= 'Output/Toffoli_RWA_01-07-19/occupation_q1_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp2 	= 'Output/Toffoli_RWA_01-07-19/occupation_q2_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_ocp3 	= 'Output/Toffoli_RWA_01-07-19/occupation_q3_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz1 	= 'Output/Toffoli_RWA_01-07-19/sz1_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz2 	= 'Output/Toffoli_RWA_01-07-19/sz2_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
+			outputstr_sz3 	= 'Output/Toffoli_RWA_01-07-19/sz3_111-RWA-' + str(f1) + '_' + str(f2) +'_' + str(f3) + '.dat'
 			print('111 RWA')
-			result = mesolve(H_RWA,psi0,tlist,c_ops,[],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
+			result = mesolve(H_RWA,psi0,tlist,c_ops,options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 
 		fidelity_dat 	= []
 		occupation_1 	= []
