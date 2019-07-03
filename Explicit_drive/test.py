@@ -72,7 +72,7 @@ H = [(I + q3 + q3.dag() -(0+1j)*(q2.dag()-q2) -(0+1j)*(q1.dag()-q1) +(0+1j)*(q2*
 [q1*q2.dag()*q3.dag(),q12d3d_2_mw1_pw2_pw3],[q1.dag()*q2*q3.dag(),q1d23d_2_w1_mw2_pw3],\
 [-1*q1.dag()*q2.dag()*q3,q1d2d3_2_w1_pw2_mw3],[-1*q1.dag()*q2.dag()*q3.dag(),q1d2d3d_2_w1_pw2_pw3]]
 '''
-
+H0 = omega1 * q1.dag()*q1 + omega2 * q2.dag()*q2 + omega3 * q3.dag()*q3 + U1 * q1.dag() * q1.dag() * q1 * q1 + U2 * q2.dag() * q2.dag() * q2 * q2 + U3 * q3.dag() * q3.dag() * q3 * q3
 H = [\
 
 [-1*q3,Q3],[-1*q3.dag(),Q3d],\

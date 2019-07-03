@@ -120,5 +120,64 @@ def Q1d23d(t,*args):
 def Q1d23(t,*args):
 	return EJ  * drive(t)
 
+'''
+def Q1(t,*args):
+	return c_exp_d(omega1,t) * drive(t)
+def Q1d(t,*args):
+	return c_exp(omega1,t) * drive(t)
 
+def Q2(t,*args):
+	return c_exp_d(omega2,t) * drive(t)
+def Q2d(t,*args):
+	return c_exp(omega2,t) * drive(t)
+
+def Q3(t,*args):
+	return c_exp_d(omega3,t) * drive(t)
+def Q3d(t,*args):
+	return c_exp(omega3,t) * drive(t)
+
+def Q23(t,*args):
+	return c_exp_d(omega2+omega3,t) * drive(t)
+def Q23d(t,*args):	
+	return c_exp_d(omega2-omega3,t) * drive(t)
+def Q2d3(t,*args):
+	return c_exp(omega2-omega3,t) * drive(t)
+def Q2d3d(t,*args):
+	return c_exp(omega2+omega3,t) * drive(t)
+
+def Q13(t,*args):
+	return c_exp_d(omega1+omega3,t) * drive(t)
+def Q13d(t,*args):	
+	return c_exp_d(omega1-omega3,t) * drive(t)
+def Q1d3(t,*args):
+	return c_exp(omega1-omega3,t) * drive(t)
+def Q1d3d(t,*args):
+	return c_exp(omega1+omega3,t) * drive(t)
+
+def Q12(t,*args):
+	return c_exp_d(omega1+omega2,t) * drive(t)
+def Q12d(t,*args):	
+	return c_exp_d(omega1-omega2,t) * drive(t)
+def Q1d2(t,*args):
+	return c_exp(omega1-omega2,t) * drive(t)
+def Q1d2d(t,*args):
+	return c_exp(omega1+omega2,t) * drive(t)
+
+def Q123(t,*args):
+	return c_exp_d(omega1+omega2+omega3,t) * drive(t)
+def Q123d(t,*args):
+	return c_exp_d(omega1+omega2-omega3,t) * drive(t)
+def Q12d3(t,*args):
+	return c_exp_d(omega1-omega2+omega3,t) * drive(t)
+def Q12d3d(t,*args):
+	return c_exp_d(omega1-omega2-omega3,t) * drive(t)
+def Q1d2d3d(t,*args):
+	return c_exp(omega1+omega2+omega3,t) * drive(t)
+def Q1d2d3(t,*args):
+	return c_exp(omega1+omega2-omega3,t) * drive(t)
+def Q1d23d(t,*args):
+	return c_exp(omega1-omega2+omega3,t) * drive(t)
+def Q1d23(t,*args):
+	return c_exp(omega1-omega2-omega3,t) * drive(t)
+'''
 

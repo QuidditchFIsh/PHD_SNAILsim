@@ -1,9 +1,16 @@
 #Constants for the simulation
 
-omega1   	= 4
+omega1   	= 4-0.01
 omega2   	= 10
 omega3   	= 17
-omegaM 		= 8.5 
 
-EJ = 0.01 * 1.57*0.25
-ECQ = EJ * 0.05
+omega1d   	= 4-0.01
+omega2d   	= 10
+omega3d   	= 17
+
+omegaM 		=8.5
+
+EJ 	= 0.005 * 1.57*0.25
+ECQ = 0.05*EJ
+
+pi = 3.141592654
