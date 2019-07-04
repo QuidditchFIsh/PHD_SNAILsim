@@ -37,7 +37,7 @@ s2x = (q2 + q2.dag())
 s3x = (q3 + q3.dag())
 
 
-tlist = np.linspace(0,1000,num=1000)
+tlist = np.linspace(0,2000,num=1000)
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2),qeye(2))
 sx2 = tensor(qeye(2), R * sigmax() * R,qeye(2),qeye(2))
 sx3 = tensor(qeye(2),qeye(2), R * sigmax() * R,qeye(2))
@@ -112,7 +112,7 @@ H = [\
 
 
 
-c_ops = [0.001*q1,0.001*q2,0.001*q3,sz1*0.001,sz2*0.001,sz3*0.001]
+c_ops = [0.00001*q1,0.00001*q2,0.00001*q3,sz1*0.00001,sz2*0.00001,sz3*0.00001]
 outputstr = ''
 
 omega1   	= 4
