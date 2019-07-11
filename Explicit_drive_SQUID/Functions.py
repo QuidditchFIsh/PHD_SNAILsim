@@ -1,8 +1,6 @@
 from math import *
 from Constants import *
 
-#Define the 
-
 #Define a complex exponential function
 def c_exp(omega,t):
 	return (cos(omega * t) + (0 + 1j)*sin(omega*t))

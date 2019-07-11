@@ -37,7 +37,7 @@ s2x = (q2 + q2.dag())
 s3x = (q3 + q3.dag())
 
 
-tlist = np.linspace(0,2000,num=1000)
+tlist = np.linspace(0,500,num=500)
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2),qeye(2))
 sx2 = tensor(qeye(2), R * sigmax() * R,qeye(2),qeye(2))
 sx3 = tensor(qeye(2),qeye(2), R * sigmax() * R,qeye(2))
@@ -115,9 +115,9 @@ H = [\
 c_ops = [0.00001*q1,0.00001*q2,0.00001*q3,sz1*0.00001,sz2*0.00001,sz3*0.00001]
 outputstr = ''
 
-omega1   	= 4
-omega2   	= 10
-omega3   	= 17
+omega1   	= 4 * 2 * pi
+omega2   	= 10 * 2 * pi
+omega3   	= 17 * 2 * pi
 for i in range(0,2):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero)
