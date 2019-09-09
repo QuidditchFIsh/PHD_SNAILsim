@@ -122,21 +122,21 @@ for i in range(0,2):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero)
 		Tdm = ket2dm(Tdm)
-		outputstr_fid 		= 'Output/Toffoli_RWA_01-07-19/fidelity000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'			
-		outputstr_ocp1 		= 'Output/Toffoli_RWA_01-07-19/occupation_q1_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocp2 		= 'Output/Toffoli_RWA_01-07-19/occupation_q2_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocp3 		= 'Output/Toffoli_RWA_01-07-19/occupation_q3_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocpsm 	= 'Output/Toffoli_RWA_01-07-19/occupation_sm_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_fid 		= 'Output/Toffoli_RWA_14-08-19/fidelity000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'			
+		outputstr_ocp1 		= 'Output/Toffoli_RWA_14-08-19/occupation_q1_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocp2 		= 'Output/Toffoli_RWA_14-08-19/occupation_q2_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocp3 		= 'Output/Toffoli_RWA_14-08-19/occupation_q3_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocpsm 	= 'Output/Toffoli_RWA_14-08-19/occupation_sm_000-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
 		print('000 Full Drive')
 		result = mesolve(H,psi0,tlist,c_ops,[R3*q1.dag()*q1*R3,R3*q2.dag()*q2*R3,R3*q3.dag()*q3*R3,R3*sm.dag()*sm*R3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 	if i == 1:
 		psi0 = tensor(one,one,one,zero);Tdm = tensor(one,one,zero,zero)
 		Tdm = ket2dm(Tdm)
-		outputstr_fid 		= 'Output/Toffoli_RWA_01-07-19/fidelity111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocp1 		= 'Output/Toffoli_RWA_01-07-19/occupation_q1_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocp2 		= 'Output/Toffoli_RWA_01-07-19/occupation_q2_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocp3 		= 'Output/Toffoli_RWA_01-07-19/occupation_q3_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
-		outputstr_ocpsm 	= 'Output/Toffoli_RWA_01-07-19/occupation_sm_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_fid 		= 'Output/Toffoli_RWA_14-08-19/fidelity111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocp1 		= 'Output/Toffoli_RWA_14-08-19/occupation_q1_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocp2 		= 'Output/Toffoli_RWA_14-08-19/occupation_q2_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocp3 		= 'Output/Toffoli_RWA_14-08-19/occupation_q3_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
+		outputstr_ocpsm 	= 'Output/Toffoli_RWA_14-08-19/occupation_sm_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
 		print('111 Full Drive')
 		result = mesolve(H,psi0,tlist,c_ops,[R3*q1.dag()*q1*R3,R3*q2.dag()*q2*R3,R3*q3.dag()*q3*R3,R3*sm.dag()*sm*R3],options = Options(nsteps = 8000,store_states = True,store_final_state = True))
 	fidelity_dat 	= []

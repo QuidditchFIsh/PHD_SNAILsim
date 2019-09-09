@@ -1,9 +1,4 @@
-'''
-Author: Aneirin John Baker
-Date:11/07/19
-Description:Script to hold all of the constants for this simulation. Will also hold some functions to calculate the energies associated with 
-some of the terms in the Hamiltonian.
-'''
+
 #Function to calculate Energies 
 def E_J (i): return i * (1e9) * h
 
@@ -36,28 +31,7 @@ ECQ3	= E_CQ(Cq3) * (1/h)
 EJ1 	= 1 * (1/h)
 EJ2 	= 1 * (1/h)
 EJ3 	= 1 * (1/h)
-EL 		= E_L(L) * (1/h) * 1e-9
+EL 		= E_L(L) 
 
-#coupling between the qubit and squid
-EJ 		= 0.01 
-#Drive constants in GHz
-omega1d = 4
-omega2d = 10
-omega3d = 17
-
-#Constants for the Hamiltonian
-q1_Bar = 1
-q2_Bar = 1
-q3_Bar = 1
-sp_Bar = 1
-
-w1 = 4
-w2 = 10
-w3 = 17
-wp = 35
-
-third = 0.333333333333333333333333
-
-
-
+print(EL/h * (1e-9))
 
