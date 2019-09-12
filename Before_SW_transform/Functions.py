@@ -21,15 +21,26 @@ def COSINE(omega,t):
 
 #Define a function to return the drive
 
-def drive(t):
-	return (-2*SINE(omega1,t) -2*SINE(omega2,t) -COSINE(omega3,t) \
-		+2*SINE((omega2 + omega3) , t) +2*SINE((omega2 - omega3) , t) \
-		+2*SINE((omega1 + omega3) , t) +2*SINE((omega1 - omega3) , t) \
-		-4*COSINE((omega1 + omega2) , t) + 4*COSINE((omega1 - omega2) , t) \
-		- 4*COSINE((omega1 + omega2 + omega3) , t)- 4*COSINE((omega1 + omega2 - omega3) , t) \
-		+ 4*COSINE((omega1 - omega2 + omega3) , t) +4*COSINE((omega1 - omega2 - omega3) , t))* PI * 0.125
-	
+def driveexp(t):
+	return (-SINE(omega1,t) -SINE(omega2,t) +COSINE(omega3,t) \
+		-SINE((omega2 + omega3) , t) -SINE((omega2 - omega3) , t) \
+		-SINE((omega1 + omega3) , t) -SINE((omega1 - omega3) , t) \
+		-COSINE((omega1 + omega2) , t) + COSINE((omega1 - omega2) , t) \
+		- COSINE((omega1 + omega2 + omega3) , t)- COSINE((omega1 + omega2 - omega3) , t) \
+		+ COSINE((omega1 - omega2 + omega3) , t) +COSINE((omega1 - omega2 - omega3) , t)) * PI * 0.125 * 0.01
 
+def drive(t):
+	return (-sin(omega1*t) - sin(omega2*t) + cos(omega3*t) \
+		- sin((omega2 + omega3) * t) - sin((omega2 - omega3) * t) \
+		- sin((omega1 + omega3) * t) - sin((omega1 - omega3) * t) \
+		- cos((omega1 + omega2) * t) + cos((omega1 - omega2) * t) \
+		- cos((omega1 + omega2 + omega3) * t) - cos((omega1 + omega2 - omega3) * t) \
+		+ cos((omega1 - omega2 + omega3) * t) + cos((omega1 - omega2 - omega3) * t))* PI * 0.125
+	
+	#return 0
+	
+def pure_drive(t,*args):
+	return drive(t)
 #Define all functions for the rotating Hamiltonian
 
 #Terms for the interaction term
@@ -63,15 +74,15 @@ def Qad_Q3d(t,*args):
 #Drive-SNAIL term
 
 def no_rotation(t,*args):
-	return drive(t)
+	return driveexp(t)
 def Qa_Qa(t,*args):
-	return c_exp(2*omegaA,t) * drive(t)
+	return c_exp(2*omegaA,t) * driveexp(t)
 def Qad_Qad(t,*args):
-	return c_exp_d(2*omegaA,t) * drive(t)
+	return c_exp_d(2*omegaA,t) * driveexp(t)
 def Qa(t,*args):
-	return c_exp(omegaA,t) * drive(t)
+	return c_exp(omegaA,t) * driveexp(t)
 def Qad(t,*args):
-	return c_exp_d(omegaA,t) * drive(t)
+	return c_exp_d(omegaA,t) * driveexp(t)
 
 
 #Functions for the full Hamiltonain
@@ -88,6 +99,15 @@ def phie3(t,*args):
 def phie4(t,*args):
 	#return (PId4 + 0.1*drive(t))**4
 	return 0
+
+def cos2(t,*args):
+	return cos(PId4 + drive(t))
+def cos6(t,*args):
+	return cos((PI/12) + drive(t))
+def sin2(t,*args):
+	return sin(PId4 + drive(t))
+def sin6(t,*args):
+	return sin((PI/12) + drive(t))
 
 
 

@@ -15,9 +15,10 @@ import numpy as np
 #Define all of the variables to use 
 
 R  		= 1/sqrt(2) * (sigmay() + sigmaz())
-R 		= 1
-#R3 		= tensor(R,R,R,R)
-R3 		=1
+
+#R 		= 1
+R3 		= tensor(R,R,R,R)
+#R3 		=1
 
 
 
@@ -51,24 +52,34 @@ va = sp_Bar * (qa + qa.dag())
 #Building the Hmiltonian using several different parts (In two level approximation. With antthing else would need to add in more terms)
 #First terms in the SQUID potential
 
-H = [	[8*third*ECQ1*qa*q1,Qa_Q1],[-8*third*ECQ1*qa.dag()*q1,Qad_Q1],[-8*third*ECQ1*qa*q1.dag(),Qa_Q1d],[8*third*ECQ1*qa.dag()*q1.dag(),Qad_Q1d],
-		[8*third*ECQ2*qa*q2,Qa_Q2],[-8*third*ECQ2*qa.dag()*q2,Qad_Q2],[-8*third*ECQ2*qa*q2.dag(),Qa_Q2d],[8*third*ECQ2*qa.dag()*q2.dag(),Qad_Q2d],
-		[8*third*ECQ3*qa*q3,Qa_Q3],[-8*third*ECQ3*qa.dag()*q3,Qad_Q2],[-8*third*ECQ3*qa*q3.dag(),Qa_Q2d],[8*third*ECQ3*qa.dag()*q3.dag(),Qad_Q2d],
-		[-0.25*0.1*EJ*qa*qa,Qa_Qa],[-0.25*0.1*EJ*qa.dag()*qa,no_rotation],[-0.25*0.1*EJ*qa*qa.dag(),no_rotation],[-0.25*0.1*EJ*qa.dag()*qa.dag(),Qad_Qad],
-		[-0.5*0.1*EJ*qa,Qa],[-0.5*0.1*EJ*qa.dag(),Qad],
+H = [	[ECQ1*qa*q1,Qa_Q1],[ECQ1*qa.dag()*q1,Qad_Q1],[ECQ1*qa*q1.dag(),Qa_Q1d],[ECQ1*qa.dag()*q1.dag(),Qad_Q1d],
+		[ECQ2*qa*q2,Qa_Q2],[ECQ2*qa.dag()*q2,Qad_Q2],[ECQ2*qa*q2.dag(),Qa_Q2d],[ECQ2*qa.dag()*q2.dag(),Qad_Q2d],
+		[ECQ3*qa*q3,Qa_Q3],[ECQ3*qa.dag()*q3,Qad_Q3],[ECQ3*qa*q3.dag(),Qa_Q3d],[ECQ3*qa.dag()*q3.dag(),Qad_Q3d],
+		[EJ*qa*qa,Qa_Qa],[EJ*qa.dag()*qa,no_rotation],[EJ*qa*qa.dag(),no_rotation],[EJ*qa.dag()*qa.dag(),Qad_Qad],
+		[EJ*qa,Qa],[EJ*qa.dag(),Qad],
 
 ] 
-
+'''
 H0 = ECQ1 * pi1 * pi1 + ECQ2 * pi2 * pi2 + ECQ3 * pi3 * pi3 - EJ1 * v1.cosm() - EJ2 * v2.cosm() - EJ3 * v3.cosm() - ECA * pia * pia + 0.1*sixth * ECQ1 * pia * pi1 + \
 	+ 0.25*EJ*va*va + 0.0625*EJ*va*va*va*va + 0.028*EJ*va*va
 H_cos_22 = [0.25*va*va,[-0.5*va,phie],[0.25,phie2]]
 H_cos_24 = [0.0625*va*va*va*va,[-0.25*va*va*va,phie],[0.375*va*va,phie2],[-0.25*va,phie3],[0.0625,phie4]]
 H_cos_62 = [0.028*va*va,[-0.056*va,phie],[0.028,phie2]]
-#H_Bare = [ H0 ,0.25*va*va,[-0.5*va,phie],[0.25,phie2],0.0625*va*va*va*va,[-0.25*va*va*va,phie],[0.375*va*va,phie2],[-0.25*va,phie3],[0.0625,phie4],0.028*va*va,[-0.056*va,phie],[0.028,phie2]]
+H_Bare = [ H0 ,0.25*va*va,[-0.5*va,phie],[0.25,phie2],0.0625*va*va*va*va,[-0.25*va*va*va,phie],[0.375*va*va,phie2],[-0.25*va,phie3],[0.0625,phie4],0.028*va*va,[-0.056*va,phie],[0.028,phie2]]
 H_Bare = [ H0 ,[-0.5*EJ*va,phie],[-0.25*EJ*va*va*va,phie],[0.375*EJ*va*va,phie2],[-0.25*EJ*va,phie3],[-0.056*EJ*va,phie]]
-#Now build mesolver varibales
 
-tlist = np.linspace(0,60,num=500)
+#Build Hamiltonian in second quantised form
+
+H0q = omega1 * q1.dag() * q1 + omega2 * q2.dag() * q2 + omega3 * q3.dag() * q3
+HS 	= EC * (1/sp_Bar) * (qa - qa.dag()) * (1/sp_Bar) * (qa - qa.dag()) 
+HI 	= ECQ1*two_thirds *(q1*qa -q1*qa.dag() - q1.dag()*qa + q1.dag()*qa.dag()) + ECQ2*two_thirds *(q2*qa -q2*qa.dag() - q2.dag()*qa + q2.dag()*qa.dag()) + \
+	ECQ3*two_thirds *(q3*qa -q3*qa.dag() - q3.dag()*qa + q3.dag()*qa.dag())
+#H2 = [H0q + HS + HI,[3*EJ*(qa+qa.dag()).cosm(),cos2],[third*EJ*(qa+qa.dag()).cosm(),cos6],[3*EJ*(qa+qa.dag()).sinm(),sin2],[third*EJ*(qa+qa.dag()).sinm(),sin6]]
+H2 = H0q +  omegaA * qa.dag() * qa + 2.2*EJ*(qa+qa.dag()).cosm()
+#Now build mesolver varibales
+'''
+
+tlist = np.linspace(0,1000,num=1000)
 
 sx1 = tensor(R * sigmax() * R,qeye(2),qeye(2),qeye(2))
 sx2 = tensor(qeye(2), R * sigmax() * R,qeye(2),qeye(2))
@@ -87,7 +98,7 @@ sz4 = tensor(qeye(2),qeye(2),qeye(2), R * sigmaz() * R)
 
 c_ops = [0.00001*q1,0.00001*q2,0.00001*q3,sz1*0.00001,sz2*0.00001,sz3*0.00001]
 
-for i in range(2,3):
+for i in range(0,2):
 	if i == 0:
 		psi0 = tensor(zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero)
 		Tdm = ket2dm(Tdm)
@@ -107,7 +118,7 @@ for i in range(2,3):
 		outputstr_ocp3 		= 'Output/Toffoli_10-09-19/occupation_q3_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
 		outputstr_ocpsa		= 'Output/Toffoli_10-09-19/occupation_sm_111-' + str(omega1) + '_' + str(omega2) +'_' + str(omega3) + '.dat'
 		print('111 Full Drive')
-		result = mesolve(H_Bare,psi0,tlist,c_ops,[R3*q1.dag()*q1*R3,R3*q2.dag()*q2*R3,R3*q3.dag()*q3*R3,R3*qa.dag()*qa*R3],options = Options(nsteps = 20000,store_states = True,store_final_state = True))
+		result = mesolve(H,psi0,tlist,c_ops,[R3*q1.dag()*q1*R3,R3*q2.dag()*q2*R3,R3*q3.dag()*q3*R3,R3*qa.dag()*qa*R3],options = Options(nsteps = 20000,store_states = True,store_final_state = True))
 	if i == 2:
 		psi0 = tensor(zero,zero,zero,zero);Tdm = tensor(zero,zero,zero,zero)
 		Tdm = ket2dm(Tdm)
