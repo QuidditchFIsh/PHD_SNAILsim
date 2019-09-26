@@ -22,25 +22,33 @@ def COSINE(omega,t):
 #Define a function to return the drive
 
 def driveexp(t):
+	'''
 	return (-SINE(omega1,t) -SINE(omega2,t) +COSINE(omega3,t) \
 		-SINE((omega2 + omega3) , t) -SINE((omega2 - omega3) , t) \
 		-SINE((omega1 + omega3) , t) -SINE((omega1 - omega3) , t) \
 		-COSINE((omega1 + omega2) , t) + COSINE((omega1 - omega2) , t) \
 		- COSINE((omega1 + omega2 + omega3) , t)- COSINE((omega1 + omega2 - omega3) , t) \
-		+ COSINE((omega1 - omega2 + omega3) , t) +COSINE((omega1 - omega2 - omega3) , t)) * PI * 0.125 * 0.01
-
+		+ COSINE((omega1 - omega2 + omega3) , t) +COSINE((omega1 - omega2 - omega3) , t)) * PI 
+	'''
+	return COSINE(omega1,t)
 def drive(t):
+	'''
 	return (-sin(omega1*t) - sin(omega2*t) + cos(omega3*t) \
 		- sin((omega2 + omega3) * t) - sin((omega2 - omega3) * t) \
 		- sin((omega1 + omega3) * t) - sin((omega1 - omega3) * t) \
 		- cos((omega1 + omega2) * t) + cos((omega1 - omega2) * t) \
 		- cos((omega1 + omega2 + omega3) * t) - cos((omega1 + omega2 - omega3) * t) \
-		+ cos((omega1 - omega2 + omega3) * t) + cos((omega1 - omega2 - omega3) * t))* PI * 0.125
+		+ cos((omega1 - omega2 + omega3) * t) + cos((omega1 - omega2 - omega3) * t))* PI 
+	'''
+	#return -cos((omega1)*t) +sin(omega2*t) + sin((omega1+omega2)*t) + sin((omega1-omega2)*t)
+	return cos((omega1)*t)
+def doubleDrive(t):
+	return cos((omega1+omega2)*t)
 	
-	#return 0
-	
-def pure_drive(t,*args):
+def pure_single_drive(t,*args):
 	return drive(t)
+def pure_double_drive(t,*args):
+	return doubleDrive(t)
 #Define all functions for the rotating Hamiltonian
 
 #Terms for the interaction term
