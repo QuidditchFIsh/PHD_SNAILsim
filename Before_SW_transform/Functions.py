@@ -41,9 +41,9 @@ def drive(t):
 		+ cos((omega1 - omega2 + omega3) * t) + cos((omega1 - omega2 - omega3) * t))* PI 
 	'''
 	#return -cos((omega1)*t) +sin(omega2*t) + sin((omega1+omega2)*t) + sin((omega1-omega2)*t)
-	return cos((omega1)*t)
+	return cos((omega2)*t)
 def doubleDrive(t):
-	return cos((omega1+omega2)*t)
+	return cos((floor(t/100))*t)
 	
 def pure_single_drive(t,*args):
 	return drive(t)
