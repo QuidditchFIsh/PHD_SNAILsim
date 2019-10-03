@@ -41,14 +41,18 @@ def drive(t):
 		+ cos((omega1 - omega2 + omega3) * t) + cos((omega1 - omega2 - omega3) * t))* PI 
 	'''
 	#return -cos((omega1)*t) +sin(omega2*t) + sin((omega1+omega2)*t) + sin((omega1-omega2)*t)
-	return cos((omega2)*t)
+	return -1*cos((omega2)*t) + sin(omega1*t) + sin((omega1+omega2)*t) + sin((omega1-omega2)*t)
 def doubleDrive(t):
-	return cos((floor(t/100))*t)
+	return cos((omega1 + omega2)*t)
+def tripleDrive(t):
+	return cos((omega1 + omega2 + 0) * t)
 	
 def pure_single_drive(t,*args):
 	return drive(t)
 def pure_double_drive(t,*args):
 	return doubleDrive(t)
+def pure_triple_drive(t,*args):
+	return tripleDrive(t)
 #Define all functions for the rotating Hamiltonian
 
 #Terms for the interaction term

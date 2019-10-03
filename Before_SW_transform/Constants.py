@@ -27,25 +27,23 @@ Cq2		= 1
 Cq3		= 1
 
 #Drive constants in GHz
-omega1 = 5
-omega2 = 7
-omega3 = 70
-omegaA = 87
+omega1 = 4
+omega2 = 6
+omega3 = 8
+omegaA = 53
 
 #These energies should have units of frequency
-ECQ1	= 5.5
-ECQ2	= 6.5
-ECQ3	= 5.5
+ECQ1	= 0.01*omegaA
+ECQ2	= 0.01*omegaA
+ECQ3	= 0.01*omegaA
 EJ1 	= 32
 EJ2 	= 25
 EJ3 	= 57.8
 ECA 	= ECQ1 + ECQ2 + ECQ3
 EC 		= 1
 #coupling between the qubit and squid
-EJ 		= 19.5
 
-
-
+EJ 		= 2*omega1
 
 #Constants for the Hamiltonian
 q1_Bar = 0.35
